@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 // Components
-import AddWeightForm from './components/AddWeightForm'
+import AddWeightForm, { addWeightFormLoader } from './components/AddWeightForm'
 
 // Routes
 import Error from "./pages/Error";
@@ -16,6 +16,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <AddWeightForm />,
+    loader: addWeightFormLoader,
     // loader: dashboardLoader,
     errorElement: <Error />
   },
