@@ -1,22 +1,31 @@
 import React, { useState } from 'react'
+
+// RRD Imports
 import { Form } from 'react-router-dom';
 
+// Components
+import Table from './Table';
+
+// Helper Functions
+import { fetchData } from '../helper';
+
 var weightInputNum = 1;
+// TODO: Create Table Component for each weight entry
 
 // Loader
 export function addWeightFormLoader(){
     // Go thru all keys starting from 1
-    while(localStorage.key(weightInputNum) != null) {
-        console.log("Key ",weightInputNum ," already exists in localStorage")
-        weightInputNum++;
-    }
-    if (localStorage.key(weightInputNum) == null && weightInputNum != 1) {
-        // When on the last key, add 1 to start adding the next key
-        // Otherwise,  don't increment the key
-        console.log("Key ",weightInputNum ," already exists in localStorage")
-        weightInputNum++;
-    } 
-    return weightInputNum;
+    // while(localStorage.key(weightInputNum) != null) {
+    //     console.log("Key ",weightInputNum ," already exists in localStorage")
+    //     weightInputNum++;
+    // }
+    // if (localStorage.key(weightInputNum) == null && weightInputNum != 1) {
+    //     // When on the last key, add 1 to start adding the next key
+    //     // Otherwise,  don't increment the key
+    //     console.log("Key ",weightInputNum ," already exists in localStorage")
+    //     weightInputNum++;
+    // } 
+    return null;
 }
 
 const AddWeightForm = () => {
@@ -27,9 +36,13 @@ const AddWeightForm = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        const inputWeight = { inputValue };
-        localStorage.setItem(weightInputNum, JSON.stringify(inputWeight));
-        console.log(inputWeight);
+        const newWeight = {
+            id: crypto.randomUUID(),
+            createdAt: Date.now(),
+            weight: +inputValue,
+        }
+        const existingWeights = fetchData("weights") ?? [];
+        localStorage.setItem("weights", JSON.stringify([...existingWeights,newWeight]));
         weightInputNum++;
     }
 
@@ -43,6 +56,7 @@ const AddWeightForm = () => {
             </button>
         </Form>
         <p>{inputValue}</p>
+        <Table />
     </div>
     )
 }
