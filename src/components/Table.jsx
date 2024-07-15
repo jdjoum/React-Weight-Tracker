@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Table = () => {
+const Table = (weights) => {
   return (
     <div className='table'>
         <table>

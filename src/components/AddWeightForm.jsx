@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 // RRD Imports
-import { Form } from 'react-router-dom';
+import { Form, useLoaderData } from 'react-router-dom';
 
 // Components
 import Table from './Table';
@@ -25,10 +25,12 @@ export function addWeightFormLoader(){
     //     console.log("Key ",weightInputNum ," already exists in localStorage")
     //     weightInputNum++;
     // } 
-    return null;
+    const weights = fetchData("weights") ?? [];
+    return weights;
 }
 
 const AddWeightForm = () => {
+    const { weights } = useLoaderData();
     const [inputValue, setInputValue] = useState('');
     const handleInputChange = (event) => {
         setInputValue(event.target.value);
@@ -56,7 +58,7 @@ const AddWeightForm = () => {
             </button>
         </Form>
         <p>{inputValue}</p>
-        <Table />
+        <Table weights={weights}/>
     </div>
     )
 }
