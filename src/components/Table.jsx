@@ -14,7 +14,9 @@ const Table = (weights) => {
                 </tr>
             </thead>
             <tbody>
-                {/* {
+                {
+                // TODO: Create row for each weight entry
+                /* {
                     expenses.map((expense) => (
                         <tr key={expense.id}>
                             <ExpenseItem expense={expense} showBudget={showBudget}/>
