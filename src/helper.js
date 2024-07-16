@@ -3,3 +3,5 @@ export const fetchData = (key) => {
     return JSON.parse(localStorage.getItem(key));
 };
 
+// Format Date
+export const formatDateToLocaleString = (epoch) => new Date(epoch).toLocaleDateString();

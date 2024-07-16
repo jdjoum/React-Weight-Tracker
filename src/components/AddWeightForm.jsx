@@ -10,23 +10,11 @@ import Table from './Table';
 import { fetchData } from '../helper';
 
 var weightInputNum = 1;
-// TODO: Create Table Component for each weight entry
 
 // Loader
 export function addWeightFormLoader(){
-    // Go thru all keys starting from 1
-    // while(localStorage.key(weightInputNum) != null) {
-    //     console.log("Key ",weightInputNum ," already exists in localStorage")
-    //     weightInputNum++;
-    // }
-    // if (localStorage.key(weightInputNum) == null && weightInputNum != 1) {
-    //     // When on the last key, add 1 to start adding the next key
-    //     // Otherwise,  don't increment the key
-    //     console.log("Key ",weightInputNum ," already exists in localStorage")
-    //     weightInputNum++;
-    // } 
     const weights = fetchData("weights") ?? [];
-    return weights;
+    return {weights};
 }
 
 const AddWeightForm = () => {
@@ -38,8 +26,12 @@ const AddWeightForm = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (fetchData("weights") != null) {
+            weightInputNum = fetchData("weights").length + 1;
+        }
         const newWeight = {
             id: crypto.randomUUID(),
+            entryNum: weightInputNum,
             createdAt: Date.now(),
             weight: +inputValue,
         }
@@ -57,8 +49,12 @@ const AddWeightForm = () => {
                 <span>Add New Weight Entry</span>
             </button>
         </Form>
-        <p>{inputValue}</p>
-        <Table weights={weights}/>
+        {
+            weights && weights.length > 0 && (
+                <Table weights={weights}/>
+            )
+        }
+        
     </div>
     )
 }

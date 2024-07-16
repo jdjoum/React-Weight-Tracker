@@ -1,6 +1,9 @@
 import React from 'react'
 
-const Table = (weights) => {
+// Components
+import WeightEntry from './WeightEntry'
+
+const Table = ({weights}) => {
   return (
     <div className='table'>
         <table>
@@ -16,13 +19,12 @@ const Table = (weights) => {
             <tbody>
                 {
                 // TODO: Create row for each weight entry
-                /* {
-                    expenses.map((expense) => (
-                        <tr key={expense.id}>
-                            <ExpenseItem expense={expense} showBudget={showBudget}/>
-                        </tr>    
+                    weights?.map((weight) => (
+                            <tr key={weight.id}>
+                                <WeightEntry weight={weight} />
+                            </tr>    
                     ))
-                } */}
+                }
             </tbody>
         </table>
     </div>
