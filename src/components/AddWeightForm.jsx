@@ -38,6 +38,7 @@ const AddWeightForm = () => {
         const existingWeights = fetchData("weights") ?? [];
         localStorage.setItem("weights", JSON.stringify([...existingWeights,newWeight]));
         weightInputNum++;
+        window.location.reload();
     }
 
     return (
