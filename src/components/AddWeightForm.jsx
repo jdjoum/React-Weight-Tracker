@@ -6,6 +6,9 @@ import { Form, useLoaderData } from 'react-router-dom';
 // Components
 import Table from './Table';
 
+// Library Imports
+import { PlusCircleIcon } from '@heroicons/react/24/solid';
+
 // Helper Functions
 import { fetchData } from '../helper';
 
@@ -65,14 +68,16 @@ const AddWeightForm = () => {
                 <input type="date" id="dateInput" className="input-field" required></input>
                 <br/>
                 <br/>
-                <button type="submit" className="centered-button">
+                <button type="submit" className='btn btn--dark'>
                     <span>Add New Weight Entry</span>
+                    <PlusCircleIcon width={20} />
                 </button>
             </Form>
         </div>
         {
             weights && weights.length > 0 && (
                 <Table weights={weights}/>
+                // TODO: Create chart with table values
             )
         }
         

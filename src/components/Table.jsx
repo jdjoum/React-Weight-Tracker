@@ -6,6 +6,7 @@ import WeightEntry from './WeightEntry'
 const Table = ({weights}) => {
   return (
     <div className='table'>
+        <h2 id="weightHistoryTitle">Weight History</h2>
         <table>
             <thead>
                 <tr>
