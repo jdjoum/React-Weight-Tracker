@@ -17,6 +17,16 @@ export function addWeightFormLoader(){
     return {weights};
 }
 
+function retrieveDate() {
+    // Get the input element by its ID
+    const dateInput = document.getElementById('dateInput');
+    console.log(dateInput);
+    // Get the value of the input field (in YYYY-MM-DD format)
+    const dateValue = dateInput.value;
+    console.log(dateValue);
+    return dateValue;
+}
+
 const AddWeightForm = () => {
     const { weights } = useLoaderData();
     const [inputValue, setInputValue] = useState('');
@@ -29,10 +39,11 @@ const AddWeightForm = () => {
         if (fetchData("weights") != null) {
             weightInputNum = fetchData("weights").length + 1;
         }
+        const date = retrieveDate();
         const newWeight = {
             id: crypto.randomUUID(),
             entryNum: weightInputNum,
-            createdAt: Date.now(),
+            createdAt: date,
             weight: +inputValue,
         }
         const existingWeights = fetchData("weights") ?? [];
@@ -44,12 +55,21 @@ const AddWeightForm = () => {
     return (
     <div className="addWeightForm">
         <h2>Add New Weight Entry</h2>
-        <Form method="post" onSubmit={handleSubmit}>
-            <input type="number" step="0.01" name="newWeightAmount" id="newWeightAmount" placeholder='ex. 175 lbs' required inputMode='decimal' onChange={handleInputChange}/>
-            <button type="submit">
-                <span>Add New Weight Entry</span>
-            </button>
-        </Form>
+        <div className='container'>
+            <Form method="post" onSubmit={handleSubmit}>
+                <label htmlFor="dateInput">Enter your weight: </label>
+                <input type="number" step="0.01" name="newWeightAmount" id="newWeightAmount" placeholder='ex. 175 lbs' required inputMode='decimal' onChange={handleInputChange}/>
+                <br/>
+                <br/>
+                <label htmlFor="dateInput">Select a date: </label>
+                <input type="date" id="dateInput" className="input-field" required></input>
+                <br/>
+                <br/>
+                <button type="submit" className="centered-button">
+                    <span>Add New Weight Entry</span>
+                </button>
+            </Form>
+        </div>
         {
             weights && weights.length > 0 && (
                 <Table weights={weights}/>
