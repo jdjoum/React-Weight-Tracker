@@ -5,3 +5,8 @@ export const fetchData = (key) => {
 
 // Format Date
 export const formatDateToLocaleString = (epoch) => new Date(epoch).toLocaleDateString();
+
+// Delete item
+export const deleteItem = ({key}) => {
+    return localStorage.removeItem(key);
+}

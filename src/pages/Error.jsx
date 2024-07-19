@@ -1,7 +1,7 @@
 import { Link, useNavigate, useRouteError } from "react-router-dom";
 
 // Library Imports
-// import { HomeIcon, ArrowUturnLeftIcon } from "@heroicons/react/24/solid";
+import { HomeIcon, ArrowUturnLeftIcon } from "@heroicons/react/24/solid";
 
 const Error = () => {
     const error = useRouteError();
@@ -16,13 +16,13 @@ const Error = () => {
                 <button 
                     onClick={() => navigate(-1)}
                 >
-                    {/* <ArrowUturnLeftIcon width={20} /> */}
+                    <ArrowUturnLeftIcon width={20} />
                     <span>Go Back</span>
                 </button>
                 <Link
                     to="/"
                 >
-                    {/* <HomeIcon width={20} /> */}
+                    <HomeIcon width={20} />
                     <span>Go home</span>
                 </Link>  
             </div>

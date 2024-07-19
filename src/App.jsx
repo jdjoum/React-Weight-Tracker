@@ -1,4 +1,4 @@
-import './App.css'
+// import './App.css'
 
 // RRD Imports
 import {
@@ -11,14 +11,46 @@ import AddWeightForm, { addWeightFormLoader } from './components/AddWeightForm'
 
 // Routes
 import Error from "./pages/Error";
+import Dashboard, { dashboardLoader } from './pages/Dashboard';
+
+// Layouts
+import Main, { mainLoader } from "./layouts/Main";
+
+// Actions
+import { logoutAction } from "./actions/logout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <AddWeightForm />,
-    loader: addWeightFormLoader,
-    // loader: dashboardLoader,
-    errorElement: <Error />
+    element: <Main />,
+    loader: mainLoader,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "/",
+        element: <Dashboard />,
+        loader: dashboardLoader,
+        errorElement: <Error />,
+      },
+      {
+        path: "logout",
+        action: logoutAction,
+      },
+      {
+        path: "/add",
+        element: <AddWeightForm />,
+        loader: addWeightFormLoader,
+        // loader: dashboardLoader,
+        errorElement: <Error />
+      },
+      {
+        path: "/about",
+        element: <h1>About</h1>,
+        loader: addWeightFormLoader,
+        // loader: dashboardLoader,
+        errorElement: <Error />
+      },
+    ]
   },
 ]);
 
@@ -26,8 +58,6 @@ function App() {
 
   return (
     <div className='App'>
-      <h1>WeightWise</h1>
-      <p>Where you can track your weight over time to help you meet your fitness goals!</p>
       <RouterProvider router={router} />
     </div>
   )
