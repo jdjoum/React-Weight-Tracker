@@ -15,7 +15,7 @@ import AddWeightForm, { addWeightFormLoader } from './components/AddWeightForm'
 
 // Routes
 import Error from "./pages/Error";
-import Dashboard, { dashboardLoader } from './pages/Dashboard';
+import Dashboard, { dashboardAction, dashboardLoader } from './pages/Dashboard';
 
 // Layouts
 import Main, { mainLoader } from "./layouts/Main";
@@ -34,6 +34,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <Dashboard />,
         loader: dashboardLoader,
+        action: dashboardAction,
         errorElement: <Error />,
       },
       {

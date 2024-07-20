@@ -23,8 +23,8 @@ const Main = () => {
     return (
         <div className="layout">
             <Nav userName={userName}/>
-            <h1>WeightWise</h1>
-            <p>Where you can track your weight over time to help you meet your fitness goals!</p>
+            {/* <h1>WeightWise</h1>
+            <p>Where you can track your weight over time to help you meet your fitness goals!</p> */}
             <main>
                 <Outlet />
             </main>
