@@ -56,8 +56,8 @@ const AddWeightForm = () => {
     }
 
     return (
-    <div className="addWeightForm">
-        <h2>Add New Weight Entry</h2>
+    <div className="form-wrapper">
+        <h2 className="h3">Add New Weight Entry</h2>
         <div className='container'>
             <Form method="post" onSubmit={handleSubmit}>
                 <label htmlFor="dateInput">Enter your weight: </label>
@@ -65,7 +65,7 @@ const AddWeightForm = () => {
                 <br/>
                 <br/>
                 <label htmlFor="dateInput">Select a date: </label>
-                <input type="date" id="dateInput" className="input-field" required></input>
+                <input type="date" id="dateInput" className="input-field" name='dateInput' required></input>
                 <br/>
                 <br/>
                 <button type="submit" className='btn btn--dark'>

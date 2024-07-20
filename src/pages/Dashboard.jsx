@@ -2,6 +2,7 @@ import React from 'react'
 
 // Components
 import Intro from "../components/Intro";
+import AddWeightForm from "../components/AddWeightForm";
 
 // Library Imports
 import { toast } from "react-toastify";
@@ -15,7 +16,8 @@ import { fetchData } from '../helper';
 // Loader
 export function dashboardLoader() {
     const userName = fetchData("userName");
-    return { userName }
+    const weights = fetchData("weights");
+    return { userName, weights }
 }
 
 // Action
@@ -33,10 +35,18 @@ export async function dashboardAction({request}){
 }
 
 const Dashboard = () => {
-    const { userName } = useLoaderData()
+    const { userName, weights } = useLoaderData()
     return (
-        <div>
-            { userName ? (<p>{userName}</p>): <Intro />}
+        <div className='dashboard'>
+            <h1>Welcome back, <span className="accent">{userName}</span></h1>
+            <div className="grid-sm">
+                {/* {weights ? () : ()} */}
+                <div className="grid-lg">
+                    <div className="flex-lg">
+                        <AddWeightForm />
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

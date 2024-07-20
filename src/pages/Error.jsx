@@ -1,3 +1,4 @@
+// RRD Imports
 import { Link, useNavigate, useRouteError } from "react-router-dom";
 
 // Library Imports
@@ -13,7 +14,7 @@ const Error = () => {
             <h1>Uh oh! We've got a problem.</h1>
             <p>{error.message || error.statusText}</p>
             <div className="flex-md">
-                <button 
+                <button className="btn btn--dark"
                     onClick={() => navigate(-1)}
                 >
                     <ArrowUturnLeftIcon width={20} />
@@ -21,6 +22,7 @@ const Error = () => {
                 </button>
                 <Link
                     to="/"
+                    className="btn btn--dark"
                 >
                     <HomeIcon width={20} />
                     <span>Go home</span>

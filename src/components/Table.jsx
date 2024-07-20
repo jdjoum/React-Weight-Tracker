@@ -6,12 +6,12 @@ import WeightEntry from './WeightEntry'
 const Table = ({weights}) => {
   return (
     <div className='table'>
-        <h2 id="weightHistoryTitle">Weight History</h2>
+        <h2 className='h3'>Weight History</h2>
         <table>
             <thead>
                 <tr>
                 {
-                    ["Entry Number", "Weight", "Date", ""].map((i, index) => (
+                    ["Entry Number", "Weight (units)", "Date", ""].map((i, index) => (
                         <th key={index}>{i}</th>
                     ))
                 }
