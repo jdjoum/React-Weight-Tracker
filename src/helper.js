@@ -11,12 +11,27 @@ export const deleteItem = ({key}) => {
     return localStorage.removeItem(key);
 }
 
-// retrieveDate - Retrieves the date input value from the AddWeightForm component
-function retrieveDate() {
-    // Get the input element by its ID
+// formatDateInput - Formats the date input from the AddWeightForm component
+function formatDateInput(inputDate) {
+    // Create a Date object from the input value
+    const date = new Date(inputDate);
+
+    // Get the month, day, and year
+    const month = date.getMonth() + 1; // Months are zero-indexed, so add 1
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    // Format the date as "M/D/YYYY"
+    const formattedDate = `${month}/${day}/${year}`;
+    console.log(formattedDate); // Outputs: "7/21/2024"
+    return formattedDate
+}
+
+// getDate - Gets the date input value from the AddWeightForm component
+function getDate() {
+    // Get the date input element by its ID
     const dateInput = document.getElementById('dateInput');
     // Get the value of the input field (in YYYY-MM-DD format)
-    console.log(dateInput.value);
     return dateInput.value;
 }
 
@@ -26,12 +41,14 @@ export const addNewWeightEntry = ({ amount, date }) => {
     if (fetchData("weights") != null) {
         entryNum = fetchData("weights").length + 1;
     }
-    date = retrieveDate();
+    date = getDate();
+    const formattedDate = formatDateInput(date)
+    const now = new Date(Date.now());
     const newWeight = {
         id: crypto.randomUUID(),
         entryNum: entryNum,
-        date: date,
-        createdAt: Date.now(),
+        date: formattedDate,
+        createdAt: now.toLocaleString(),
         weight: +amount,
     }
     const existingWeights = fetchData("weights") ?? [];

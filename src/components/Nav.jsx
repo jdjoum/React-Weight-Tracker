@@ -7,7 +7,7 @@ import { Form, NavLink } from "react-router-dom"
 import { TrashIcon } from "@heroicons/react/24/solid";
 
 // Assets
-import logomark from "../assets/logomark.svg"
+import logomark from "/weighing-scale.png"
 
 const Nav = ({ userName }) => {
   return (
