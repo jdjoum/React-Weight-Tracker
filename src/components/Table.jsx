@@ -11,7 +11,7 @@ const Table = ({weights}) => {
             <thead>
                 <tr>
                 {
-                    ["Entry Number", "Weight (units)", "Date", ""].map((i, index) => (
+                    ["Entry Number", "Weight (units)", "Date", "Created At"].map((i, index) => (
                         <th key={index}>{i}</th>
                     ))
                 }
