@@ -10,9 +10,6 @@ import {
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// Components
-import AddWeightForm, { addWeightFormLoader } from './components/AddWeightForm'
-
 // Routes
 import Error from "./pages/Error";
 import Dashboard, { dashboardAction, dashboardLoader } from './pages/Dashboard';
@@ -40,20 +37,6 @@ const router = createBrowserRouter([
       {
         path: "logout",
         action: logoutAction,
-      },
-      {
-        path: "/add",
-        element: <AddWeightForm />,
-        loader: addWeightFormLoader,
-        // loader: dashboardLoader,
-        errorElement: <Error />
-      },
-      {
-        path: "/about",
-        element: <h1>About</h1>,
-        loader: addWeightFormLoader,
-        // loader: dashboardLoader,
-        errorElement: <Error />
       },
     ]
   },

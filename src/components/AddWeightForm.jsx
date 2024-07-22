@@ -9,17 +9,7 @@ import Table from './Table';
 // Library Imports
 import { PlusCircleIcon } from '@heroicons/react/24/solid';
 
-// Helper Functions
-import { fetchData } from '../helper';
-
-// Loader
-export function addWeightFormLoader(){
-    const weights = fetchData("weights") ?? [];
-    return {weights};
-}
-
-const AddWeightForm = () => {
-    const { weights } = useLoaderData();
+const AddWeightForm = ({weightUnits, weights}) => {
     return (
     <div className="form-wrapper">
         <h2 className="h3">Add New Weight Entry</h2>
@@ -42,7 +32,7 @@ const AddWeightForm = () => {
         </div>
         {
             weights && weights.length > 0 && (
-                <Table weights={weights}/>
+                <Table weights={weights} weightUnits={weightUnits}/>
                 // TODO: Create chart with table values
             )
         }
