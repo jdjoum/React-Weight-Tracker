@@ -13,11 +13,12 @@ import { useLoaderData } from "react-router-dom";
 // Helper Functions
 import { addNewWeightEntry, fetchData } from '../helper';
 
-// Loader
+// dashboardLoader - Loads the info needed from localStorage for the components within the dashboard
 export function dashboardLoader() {
     const userName = fetchData("userName");
     const weights = fetchData("weights");
-    return { userName, weights }
+    const weightUnits = fetchData("weightUnits");
+    return { userName, weights, weightUnits }
 }
 
 // Action
@@ -30,6 +31,7 @@ export async function dashboardAction({request}){
     if (_action === "newUser") {
         try {
             localStorage.setItem("userName", JSON.stringify(values.userName));
+            localStorage.setItem("weightUnits", JSON.stringify(values.weightUnits));
             return toast.success(`Welcome, ${values.userName}`);
         } catch(e) {
             throw new Error("There was a problem creating your account.");
@@ -53,7 +55,7 @@ export async function dashboardAction({request}){
 }
 
 const Dashboard = () => {
-    const { userName, weights } = useLoaderData()
+    const { userName, weights, weightUnits } = useLoaderData()
     return (
         <>
             { userName ? (
@@ -65,7 +67,7 @@ const Dashboard = () => {
                         /* {weights ? () : ()} */}
                         <div className="grid-lg">
                             <div className="flex-lg">
-                                <AddWeightForm />
+                                <AddWeightForm weightUnits={weightUnits} weights={weights}/>
                             </div>
                         </div>
                     </div>

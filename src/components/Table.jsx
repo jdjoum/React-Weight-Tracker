@@ -3,15 +3,18 @@ import React from 'react'
 // Components
 import WeightEntry from './WeightEntry'
 
-const Table = ({weights}) => {
-  return (
+const Table = ({ weights,  weightUnits }) => {
+    const weightUnitsStr = JSON.stringify(weightUnits);
+    // Unquote the units string from JSON.stringify
+    const unquotedUnits = weightUnits.replace(/"([^"]+)":/g, '$1:');
+    return (
     <div className='table'>
         <h2 className='h3'>Weight History</h2>
         <table>
             <thead>
                 <tr>
                 {
-                    ["Entry Number", "Weight (units)", "Date", "Created At"].map((i, index) => (
+                    ["Entry Number", "Weight (" + unquotedUnits + ")", "Date", "Created At"].map((i, index) => (
                         <th key={index}>{i}</th>
                     ))
                 }
@@ -29,7 +32,7 @@ const Table = ({weights}) => {
             </tbody>
         </table>
     </div>
-  )
+    )
 }
 
 export default Table

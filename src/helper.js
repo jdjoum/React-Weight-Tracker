@@ -32,6 +32,7 @@ function getDate() {
     // Get the date input element by its ID
     const dateInput = document.getElementById('dateInput');
     // Get the value of the input field (in YYYY-MM-DD format)
+    console.log(dateInput.value);
     return dateInput.value;
 }
 
