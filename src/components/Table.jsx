@@ -9,7 +9,6 @@ const Table = ({ weights,  weightUnits }) => {
     const unquotedUnits = weightUnits.replace(/"([^"]+)":/g, '$1:');
     return (
     <div className='table'>
-        <h2 className='h3'>Weight History</h2>
         <table>
             <thead>
                 <tr>

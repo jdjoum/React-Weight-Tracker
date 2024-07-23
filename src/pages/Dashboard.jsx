@@ -3,6 +3,8 @@ import React from 'react'
 // Components
 import Intro from "../components/Intro";
 import AddWeightForm from "../components/AddWeightForm";
+import Table from '../components/Table';
+import WeightUnitsToggle from '../components/WeightUnitsToggle';
 
 // Library Imports
 import { toast } from "react-toastify";
@@ -11,7 +13,7 @@ import { toast } from "react-toastify";
 import { useLoaderData } from "react-router-dom";
 
 // Helper Functions
-import { addNewWeightEntry, fetchData } from '../helper';
+import { addNewWeightEntry, fetchData, wait } from '../helper';
 
 // dashboardLoader - Loads the info needed from localStorage for the components within the dashboard
 export function dashboardLoader() {
@@ -23,7 +25,7 @@ export function dashboardLoader() {
 
 // Action
 export async function dashboardAction({request}){
-    // await wait()
+    await wait()
     const data = await request.formData();
     const {_action,  ...values} = Object.fromEntries(data);
 
@@ -70,6 +72,16 @@ const Dashboard = () => {
                                 <AddWeightForm weightUnits={weightUnits} weights={weights}/>
                             </div>
                         </div>
+                        {
+                            //TODO: Create chart with table values
+                            weights && weights.length > 0 && (
+                                <div className="grid-md">
+                                    <WeightUnitsToggle weights={weights} weightUnits={weightUnits} />
+                                    <h2>Weight History</h2>
+                                    <Table weights={weights} weightUnits={weightUnits} /> 
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
             ) : <Intro />}
