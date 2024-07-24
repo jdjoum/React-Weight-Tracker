@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 // Components
 import Intro from "../components/Intro";
 import AddWeightForm from "../components/AddWeightForm";
-import Table from '../components/Table';
 
 // Library Imports
 import { toast } from "react-toastify";
@@ -65,17 +64,9 @@ const Dashboard = () => {
                     <div className="grid-sm">
                         <div className="grid-lg">
                             <div className="flex-lg">
-                                <AddWeightForm weightUnits={weightUnits} weights={weights}/>
+                                <AddWeightForm weights={weights} weightUnits={weightUnits} />
                             </div>
                         </div>
-                        {
-                            //TODO: Create chart with table values
-                            weights && weights.length > 0 && (
-                                <div className="grid-md">
-                                    <Table weights={weights} weightUnits={weightUnits} /> 
-                                </div>
-                            )
-                        }
                     </div>
                 </div>
             ) : <Intro />}

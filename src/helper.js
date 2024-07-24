@@ -36,12 +36,13 @@ export const addNewWeightEntry = ({ amount, date }) => {
     date = getDate();
     const formattedDate = formatDateInput(date)
     const now = new Date(Date.now());
+    const formattedAmount = (+amount).toFixed(2);
     const newWeight = {
         id: crypto.randomUUID(),
         entryNum: entryNum,
         date: formattedDate,
         createdAt: now.toLocaleString(),
-        weight: +amount,
+        weight: formattedAmount,
     }
     const existingWeights = fetchData("weights") ?? [];
     localStorage.setItem("weights", JSON.stringify([...existingWeights,newWeight]));
