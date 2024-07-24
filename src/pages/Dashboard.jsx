@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // Components
 import Intro from "../components/Intro";
@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { useLoaderData } from "react-router-dom";
 
 // Helper Functions
-import { addNewWeightEntry, fetchData } from '../helper';
+import { addNewWeightEntry, fetchData, wait } from '../helper';
 
 // dashboardLoader - Loads the info needed from localStorage for the components within the dashboard
 export function dashboardLoader() {
@@ -23,7 +23,7 @@ export function dashboardLoader() {
 
 // Action
 export async function dashboardAction({request}){
-    // await wait()
+    await wait()
     const data = await request.formData();
     const {_action,  ...values} = Object.fromEntries(data);
 
@@ -62,12 +62,9 @@ const Dashboard = () => {
                 <div className='dashboard'>
                     <h1>Welcome back, <span className="accent">{userName}</span></h1>
                     <div className="grid-sm">
-                        {
-                        // TODO: Create component called SelectWeightUnits 
-                        /* {weights ? () : ()} */}
                         <div className="grid-lg">
                             <div className="flex-lg">
-                                <AddWeightForm weightUnits={weightUnits} weights={weights}/>
+                                <AddWeightForm weights={weights} weightUnits={weightUnits} />
                             </div>
                         </div>
                     </div>

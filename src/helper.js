@@ -1,3 +1,6 @@
+// wait - Adds a wait time for form submissions
+export const wait = () => new Promise(res => setTimeout(res, Math.random() * 800));
+
 // fetchData - Fetches an item from localStorage
 export const fetchData = (key) => {
     return JSON.parse(localStorage.getItem(key));
@@ -13,26 +16,14 @@ export const deleteItem = ({key}) => {
 
 // formatDateInput - Formats the date input from the AddWeightForm component
 function formatDateInput(inputDate) {
-    // Create a Date object from the input value
-    const date = new Date(inputDate);
-
-    // Get the month, day, and year
-    const month = date.getMonth() + 1; // Months are zero-indexed, so add 1
-    const day = date.getDate();
-    const year = date.getFullYear();
-
-    // Format the date as "M/D/YYYY"
+    const [year, month, day] = inputDate.split('-').map(Number);
     const formattedDate = `${month}/${day}/${year}`;
-    console.log(formattedDate); // Outputs: "7/21/2024"
     return formattedDate
 }
 
 // getDate - Gets the date input value from the AddWeightForm component
 function getDate() {
-    // Get the date input element by its ID
     const dateInput = document.getElementById('dateInput');
-    // Get the value of the input field (in YYYY-MM-DD format)
-    console.log(dateInput.value);
     return dateInput.value;
 }
 
@@ -45,15 +36,40 @@ export const addNewWeightEntry = ({ amount, date }) => {
     date = getDate();
     const formattedDate = formatDateInput(date)
     const now = new Date(Date.now());
+    const formattedAmount = (+amount).toFixed(2);
     const newWeight = {
         id: crypto.randomUUID(),
         entryNum: entryNum,
         date: formattedDate,
         createdAt: now.toLocaleString(),
-        weight: +amount,
+        weight: formattedAmount,
     }
     const existingWeights = fetchData("weights") ?? [];
     localStorage.setItem("weights", JSON.stringify([...existingWeights,newWeight]));
     entryNum++;
+}
+
+// lbsToKgs - Converts lbs to kgs
+export const lbsToKgs = (lbs) => {
+    return (lbs * 0.453592).toFixed(2);
+};
+  
+// kgsToLbs - Converts kgs to lbs
+export const kgsToLbs = (kgs) => {
+    return (kgs * 2.20462).toFixed(2);
+};
+
+// convertWeightUnits - Converts the existingWeights to kgs or lbs based on the unit
+export const convertWeightUnits = (existingWeights, unit) => {
+    var newWeights = structuredClone(existingWeights);
+    for (let i = 0; i < existingWeights.length; i++) {
+        if (unit == "kgs") {
+            newWeights[i].weight = kgsToLbs(existingWeights[i].weight);
+        } else {
+            newWeights[i].weight = lbsToKgs(existingWeights[i].weight);
+        }
+    }
+    localStorage.setItem("weights", JSON.stringify(newWeights));
+    return newWeights;
 }
 
