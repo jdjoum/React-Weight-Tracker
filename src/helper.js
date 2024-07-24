@@ -48,3 +48,27 @@ export const addNewWeightEntry = ({ amount, date }) => {
     entryNum++;
 }
 
+// lbsToKgs - Converts lbs to kgs
+export const lbsToKgs = (lbs) => {
+    return (lbs * 0.453592).toFixed(2);
+};
+  
+// kgsToLbs - Converts kgs to lbs
+export const kgsToLbs = (kgs) => {
+    return (kgs * 2.20462).toFixed(2);
+};
+
+// convertWeightUnits - Converts the existingWeights to kgs or lbs based on the unit
+export const convertWeightUnits = (existingWeights, unit) => {
+    var newWeights = structuredClone(existingWeights);
+    for (let i = 0; i < existingWeights.length; i++) {
+        if (unit == "kgs") {
+            newWeights[i].weight = kgsToLbs(existingWeights[i].weight);
+        } else {
+            newWeights[i].weight = lbsToKgs(existingWeights[i].weight);
+        }
+    }
+    localStorage.setItem("weights", JSON.stringify(newWeights));
+    return newWeights;
+}
+

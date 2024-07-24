@@ -1,10 +1,10 @@
 import React from 'react'
 
-const WeightEntry = ({weight}) => {
+const WeightEntry = ({ weight, weightUnits }) => {
   return (
     <>
         <td>{weight.entryNum}</td>
-        <td>{weight.weight}</td>
+        <td>{weight.weight + " " +weightUnits}</td>
         <td>{weight.date}</td>
         <td>{weight.createdAt}</td>
     </>

@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // Components
 import Intro from "../components/Intro";
 import AddWeightForm from "../components/AddWeightForm";
 import Table from '../components/Table';
-import WeightUnitsToggle from '../components/WeightUnitsToggle';
 
 // Library Imports
 import { toast } from "react-toastify";
@@ -64,9 +63,6 @@ const Dashboard = () => {
                 <div className='dashboard'>
                     <h1>Welcome back, <span className="accent">{userName}</span></h1>
                     <div className="grid-sm">
-                        {
-                        // TODO: Create component called SelectWeightUnits 
-                        /* {weights ? () : ()} */}
                         <div className="grid-lg">
                             <div className="flex-lg">
                                 <AddWeightForm weightUnits={weightUnits} weights={weights}/>
@@ -76,8 +72,6 @@ const Dashboard = () => {
                             //TODO: Create chart with table values
                             weights && weights.length > 0 && (
                                 <div className="grid-md">
-                                    <WeightUnitsToggle weights={weights} weightUnits={weightUnits} />
-                                    <h2>Weight History</h2>
                                     <Table weights={weights} weightUnits={weightUnits} /> 
                                 </div>
                             )
