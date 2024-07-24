@@ -34,23 +34,28 @@ const AddWeightForm = ({ weights, weightUnits }) => {
         }
     }, [isSubmitting])
 
+    useEffect(() => {
+        localStorage.setItem("weightUnits", JSON.stringify(unit));
+    }, [unit])
+
     const handleToggle = () => {
         const existingWeights = fetchData("weights") ?? [];
         var newWeights = convertWeightUnits(existingWeights, unit);
         setWeightVals(newWeights);
         setCount(count + 1);
+        localStorage.setItem("weightUnits", JSON.stringify(unit));
         setUnit(prevUnits => (prevUnits === 'kgs' ? 'lbs' : 'kgs'));
     };
 
     return (
     <>
         <div className="form-wrapper">
-            <h2 className="h3">Add New Weight Entry</h2>
+            <h2 className="h3">Add New Weight Entry in {unit}</h2>
             <div className='container'>
                 <fetcher.Form method="post" className="grid-sm" ref={formRef}>
                     <div className="grid-xs">
                         <label htmlFor="newWeightAmount">Weight Amount </label>
-                        <input type="number" step="0.01" name="newWeightAmount" id="newWeightAmount" placeholder='ex. 175 lbs' required inputMode='decimal'ref={focusRef}/>
+                        <input type="number" step="0.01" name="newWeightAmount" id="newWeightAmount" placeholder={`Enter your weight (${unit})`} required inputMode='decimal'ref={focusRef}/>
                     </div>
                     <div className="grid-xs">
                         <label htmlFor="dateInput">Date </label>
@@ -83,7 +88,7 @@ const AddWeightForm = ({ weights, weightUnits }) => {
                                 {
                                     isSubmitting2 ? <span>Submitting...</span> : (
                                         <>
-                                            <span>{unit === 'lbs' ? 'Show Weight History in kgs' : 'Show Weight History in lbs'}</span>
+                                            <span>{unit === 'lbs' ? 'Change units to kgs' : 'Change units to lbs'}</span>
                                             <ArrowPathIcon width={20} />
                                         </>
                                     )
