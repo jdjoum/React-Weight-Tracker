@@ -1,17 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 // RRD Imports
-import { Form, useFetcher } from 'react-router-dom';
+import { useFetcher } from 'react-router-dom';
 
 // Components
 import WeightEntry from './WeightEntry'
 
 // Library Imports
-import { PlusCircleIcon } from '@heroicons/react/24/solid';// Library Imports
+import { PlusCircleIcon } from '@heroicons/react/24/solid';
 import { ArrowPathIcon } from '@heroicons/react/24/solid';
 
 // Helper functions
 import { convertWeightUnits, fetchData } from '../helper';
+import WeightLineChart from './WeightLineChart';
 
 const AddWeightForm = ({ weights, weightUnits }) => {
     const fetcher = useFetcher();
@@ -118,6 +119,7 @@ const AddWeightForm = ({ weights, weightUnits }) => {
                                 }
                             </tbody>
                         </table>
+                        <WeightLineChart weightEntries={weightVals} weightUnits={unit}/>
                     </div>
                 </div>
             )
