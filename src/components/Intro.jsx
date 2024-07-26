@@ -23,6 +23,8 @@ const Intro = () => {
                   <option value="lbs">lbs</option>
                   <option value="kgs">kgs</option>
                 </select>
+                <label htmlFor="goalWeight">Goal Weight</label>
+                <input type='number' name='goalWeight' required inputMode='decimal' placeholder='What is your goal weight?' aria-label='Your Goal Weight' step="0.01"  />
                 <input type="hidden" name='_action' value="newUser" />
                 <button type="submit" className="btn btn--dark">
                     <span>Create Account</span>

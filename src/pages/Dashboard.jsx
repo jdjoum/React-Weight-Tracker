@@ -18,7 +18,8 @@ export function dashboardLoader() {
     const userName = fetchData("userName");
     const weights = fetchData("weights");
     const weightUnits = fetchData("weightUnits");
-    return { userName, weights, weightUnits }
+    const goalWeight = fetchData("goalWeight");
+    return { userName, weights, weightUnits, goalWeight }
 }
 
 // Action
@@ -32,6 +33,7 @@ export async function dashboardAction({request}){
         try {
             localStorage.setItem("userName", JSON.stringify(values.userName));
             localStorage.setItem("weightUnits", JSON.stringify(values.weightUnits));
+            localStorage.setItem("goalWeight", JSON.stringify(values.goalWeight));
             return toast.success(`Welcome, ${values.userName}`);
         } catch(e) {
             throw new Error("There was a problem creating your account.");
@@ -55,7 +57,7 @@ export async function dashboardAction({request}){
 }
 
 const Dashboard = () => {
-    const { userName, weights, weightUnits } = useLoaderData()
+    const { userName, weights, weightUnits, goalWeight } = useLoaderData()
     return (
         <>
             { userName ? (
@@ -64,7 +66,7 @@ const Dashboard = () => {
                     <div className="grid-sm">
                         <div className="grid-lg">
                             <div className="flex-lg">
-                                <AddWeightForm weights={weights} weightUnits={weightUnits} />
+                                <AddWeightForm weights={weights} weightUnits={weightUnits} goalWeight={goalWeight}/>
                             </div>
                         </div>
                     </div>

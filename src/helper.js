@@ -73,3 +73,15 @@ export const convertWeightUnits = (existingWeights, unit) => {
     return newWeights;
 }
 
+// convertGoalWeight - Converts the goalWeight to kgs or lbs based on the unit
+export const convertGoalWeight = (goalWeight, unit) => {
+    var newGoalWeight = 0;
+    if (unit == "kgs") {
+        newGoalWeight = kgsToLbs(goalWeight);
+    } else {
+        newGoalWeight = lbsToKgs(goalWeight);
+    }
+    localStorage.setItem("goalWeight", JSON.stringify(newGoalWeight));
+    return newGoalWeight;
+}
+
