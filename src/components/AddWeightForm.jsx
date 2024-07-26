@@ -11,10 +11,10 @@ import { PlusCircleIcon } from '@heroicons/react/24/solid';
 import { ArrowPathIcon } from '@heroicons/react/24/solid';
 
 // Helper functions
-import { convertWeightUnits, fetchData } from '../helper';
+import { convertGoalWeight, convertWeightUnits, fetchData } from '../helper';
 import WeightLineChart from './WeightLineChart';
 
-const AddWeightForm = ({ weights, weightUnits }) => {
+const AddWeightForm = ({ weights, weightUnits, goalWeight }) => {
     const fetcher = useFetcher();
     const isSubmitting = fetcher.state === "submitting";
     const isSubmitting2 = fetcher.state === "submitting";
@@ -22,6 +22,7 @@ const AddWeightForm = ({ weights, weightUnits }) => {
     const focusRef = useRef();
     const [weightVals, setWeightVals] = useState(weights);
     const [unit, setUnit] = useState(weightUnits);
+    const [targetWeight, setTargetWeight] = useState(goalWeight);
     const [count, setCount] = useState(0);
 
 
@@ -40,12 +41,14 @@ const AddWeightForm = ({ weights, weightUnits }) => {
     }, [unit])
 
     const handleToggle = () => {
+        setCount(count + 1);
         const existingWeights = fetchData("weights") ?? [];
         var newWeights = convertWeightUnits(existingWeights, unit);
         setWeightVals(newWeights);
-        setCount(count + 1);
         localStorage.setItem("weightUnits", JSON.stringify(unit));
         setUnit(prevUnits => (prevUnits === 'kgs' ? 'lbs' : 'kgs'));
+        var newGoalWeight = convertGoalWeight(targetWeight, unit);
+        setTargetWeight(newGoalWeight);
     };
 
     return (
@@ -119,7 +122,7 @@ const AddWeightForm = ({ weights, weightUnits }) => {
                                 }
                             </tbody>
                         </table>
-                        <WeightLineChart weightEntries={weightVals} weightUnits={unit}/>
+                        <WeightLineChart weightEntries={weightVals} weightUnits={unit} goalWeight={targetWeight}/>
                     </div>
                 </div>
             )
