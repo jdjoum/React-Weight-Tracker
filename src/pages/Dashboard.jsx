@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { useLoaderData } from "react-router-dom";
 
 // Helper Functions
-import { addNewWeightEntry, fetchData, wait } from '../helper';
+import { addNewWeightEntry, fetchData, updateGoalWeight, wait } from '../helper';
 
 // dashboardLoader - Loads the info needed from localStorage for the components within the dashboard
 export function dashboardLoader() {
@@ -51,6 +51,19 @@ export async function dashboardAction({request}){
         } catch(e) {
             console.error(e)
             throw new Error("There was a problem adding the new weight entry.");
+        }
+    }
+
+    // updateGoalWeight Form Submission in AddWeightForm component
+    if (_action === "updateGoalWeight") {
+        try {
+            const goalWeight = parseFloat(values.newGoalWeight);
+            const formattedGoalWeight = goalWeight.toFixed(2);
+            updateGoalWeight(formattedGoalWeight);
+            return toast.success("Goal weight updated!");
+        } catch(e) {
+            console.error(e)
+            throw new Error("There was a problem updating your goal weight.");
         }
     }
 

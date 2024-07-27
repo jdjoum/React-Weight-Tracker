@@ -85,3 +85,8 @@ export const convertGoalWeight = (goalWeight, unit) => {
     return newGoalWeight;
 }
 
+// updateGoalWeight - Updates the goal weight stored in localStorage 
+export const updateGoalWeight = ( weight ) => {
+    localStorage.setItem("goalWeight", weight);
+}
+
