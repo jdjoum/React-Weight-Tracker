@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 // RRD Imports
-import { useFetcher } from 'react-router-dom';
+import { useFetcher, Form } from 'react-router-dom';
 
 // Components
 import WeightEntry from './WeightEntry'
@@ -17,9 +17,11 @@ import WeightLineChart from './WeightLineChart';
 const AddWeightForm = ({ weights, weightUnits, goalWeight }) => {
     const fetcher = useFetcher();
     const isSubmitting = fetcher.state === "submitting";
-    const isSubmitting2 = fetcher.state === "submitting";
+    // Ref variables
     const formRef = useRef();
     const focusRef = useRef();
+    const inputRef = useRef();
+    // State variables
     const [weightVals, setWeightVals] = useState(weights);
     const [unit, setUnit] = useState(weightUnits);
     const [targetWeight, setTargetWeight] = useState(goalWeight);
@@ -33,6 +35,8 @@ const AddWeightForm = ({ weights, weightUnits, goalWeight }) => {
             focusRef.current.focus()
             const existingWeights = fetchData("weights") ?? [];
             setWeightVals(existingWeights);
+            const goalWeight = fetchData("goalWeight");
+            setTargetWeight(goalWeight);
         }
     }, [isSubmitting])
 
@@ -40,6 +44,7 @@ const AddWeightForm = ({ weights, weightUnits, goalWeight }) => {
         localStorage.setItem("weightUnits", JSON.stringify(unit));
     }, [unit])
 
+    // handleToggle - Handles the logic when the change weight units toggle button is clicked
     const handleToggle = () => {
         setCount(count + 1);
         const existingWeights = fetchData("weights") ?? [];
@@ -87,10 +92,32 @@ const AddWeightForm = ({ weights, weightUnits, goalWeight }) => {
                     <div className='table'>
                         {/* WeightUnitsToggle Form */}
                         <div className='form-wrapper'>
+                            <h2 className="h3">Update Goal Weight in {unit}</h2>
+                            <fetcher.Form method="post" ref={formRef}>
+                                <div className="grid-xs">
+                                    <label htmlFor="newGoalWeight">Weight Amount </label>
+                                    <input type="number" step="0.01" name="newGoalWeight" id="newGoalWeight" placeholder={`Enter your goal weight (${unit})`} required inputMode='decimal' ref={focusRef}/>
+                                    <input type="hidden" name="_action" value="updateGoalWeight"/>
+                                    <button type="submit" className='btn btn--dark' disabled={isSubmitting}>
+                                        {
+                                            isSubmitting ? <span>Submitting...</span> : (
+                                                <>
+                                                    <span>Update Goal Weight</span>
+                                                    <ArrowPathIcon width={20} />
+                                                </>
+                                            )
+                                        }
+                                    </button>
+                                </div>
+                            </fetcher.Form>
+                        </div>
+                        <br></br>
+                        {/* WeightUnitsToggle Form */}
+                        <div className='form-wrapper'>
                             <h2 className="h3">Change Weight Units</h2>
-                            <button type="submit" className='btn btn--dark' disabled={isSubmitting2} onClick={handleToggle}>
+                            <button type="submit" className='btn btn--dark' disabled={isSubmitting} onClick={handleToggle}>
                                 {
-                                    isSubmitting2 ? <span>Submitting...</span> : (
+                                    isSubmitting ? <span>Submitting...</span> : (
                                         <>
                                             <span>{unit === 'lbs' ? 'Change units to kgs' : 'Change units to lbs'}</span>
                                             <ArrowPathIcon width={20} />
