@@ -10,7 +10,12 @@ export const fetchData = (key) => {
 export const formatDateToLocaleString = (epoch) => new Date(epoch).toLocaleDateString();
 
 // deleteItem - Deletes an item from localStorage
-export const deleteItem = ({key}) => {
+export const deleteItem = ({key, id}) => {
+    const existingData = fetchData(key);
+    if(id){
+        const newData = existingData.filter((item) => item.id !== id)
+        return localStorage.setItem(key, JSON.stringify(newData));
+    }
     return localStorage.removeItem(key);
 }
 
@@ -29,24 +34,18 @@ function getDate() {
 
 // addNewWeightEntry - Adds a new weight entry to the list of weights stored in localStorage 
 export const addNewWeightEntry = ({ amount, date }) => {
-    var entryNum = 1;
-    if (fetchData("weights") != null) {
-        entryNum = fetchData("weights").length + 1;
-    }
     date = getDate();
     const formattedDate = formatDateInput(date)
     const now = new Date(Date.now());
     const formattedAmount = (+amount).toFixed(2);
     const newWeight = {
         id: crypto.randomUUID(),
-        entryNum: entryNum,
         date: formattedDate,
         createdAt: now.toLocaleString(),
         weight: formattedAmount,
     }
     const existingWeights = fetchData("weights") ?? [];
     localStorage.setItem("weights", JSON.stringify([...existingWeights,newWeight]));
-    entryNum++;
 }
 
 // lbsToKgs - Converts lbs to kgs
