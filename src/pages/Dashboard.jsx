@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { useLoaderData } from "react-router-dom";
 
 // Helper Functions
-import { addNewWeightEntry, fetchData, updateGoalWeight, wait } from '../helper';
+import { addNewWeightEntry, deleteItem, fetchData, updateGoalWeight, wait } from '../helper';
 
 // dashboardLoader - Loads the info needed from localStorage for the components within the dashboard
 export function dashboardLoader() {
@@ -28,7 +28,7 @@ export async function dashboardAction({request}){
     const data = await request.formData();
     const {_action,  ...values} = Object.fromEntries(data);
 
-    // newUser Form Submission in Intro component
+    // newUser Form Submission in the Intro component
     if (_action === "newUser") {
         try {
             localStorage.setItem("userName", JSON.stringify(values.userName));
@@ -40,7 +40,7 @@ export async function dashboardAction({request}){
         }
     }
 
-    // addWeightEntry Form Submission in AddWeightForm component
+    // addWeightEntry Form Submission in the AddWeightForm component
     if (_action === "addWeightEntry") {
         try {
             addNewWeightEntry({
@@ -54,7 +54,7 @@ export async function dashboardAction({request}){
         }
     }
 
-    // updateGoalWeight Form Submission in AddWeightForm component
+    // updateGoalWeight Form Submission in the AddWeightForm component
     if (_action === "updateGoalWeight") {
         try {
             const goalWeight = parseFloat(values.newGoalWeight);
@@ -64,6 +64,19 @@ export async function dashboardAction({request}){
         } catch(e) {
             console.error(e)
             throw new Error("There was a problem updating your goal weight.");
+        }
+    }
+
+    // deleteWeightEntry Form submission in the AddWeightForm component
+    if (_action === "deleteWeightEntry") {
+        try {
+            deleteItem({
+                key: "weights",
+                id: values.weightID
+            })
+            return toast.success("Weight entry deleted!")
+        } catch(e) {
+            throw new Error("There was a problem deleting the weight entry.")
         }
     }
 

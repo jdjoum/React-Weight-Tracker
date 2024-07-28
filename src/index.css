@@ -600,3 +600,9 @@ table a {
 .Toastify__toast-body {
   font-size: var(--fs-300);
 }
+
+.rights-reserved {
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+}

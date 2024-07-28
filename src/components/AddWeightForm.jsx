@@ -3,12 +3,8 @@ import React, { useEffect, useRef, useState } from 'react'
 // RRD Imports
 import { useFetcher, Form } from 'react-router-dom';
 
-// Components
-import WeightEntry from './WeightEntry'
-
 // Library Imports
-import { PlusCircleIcon } from '@heroicons/react/24/solid';
-import { ArrowPathIcon } from '@heroicons/react/24/solid';
+import { PlusCircleIcon, ArrowPathIcon, TrashIcon } from '@heroicons/react/24/solid';
 
 // Helper functions
 import { convertGoalWeight, convertWeightUnits, fetchData } from '../helper';
@@ -20,7 +16,6 @@ const AddWeightForm = ({ weights, weightUnits, goalWeight }) => {
     // Ref variables
     const formRef = useRef();
     const focusRef = useRef();
-    const inputRef = useRef();
     // State variables
     const [weightVals, setWeightVals] = useState(weights);
     const [unit, setUnit] = useState(weightUnits);
@@ -86,17 +81,16 @@ const AddWeightForm = ({ weights, weightUnits, goalWeight }) => {
         </div>
         {   
             // Table Component
-            //TODO: Create chart with table values
             weightVals && weightVals.length > 0 && (
                 <div className="grid-md">
                     <div className='table'>
                         {/* WeightUnitsToggle Form */}
                         <div className='form-wrapper'>
                             <h2 className="h3">Update Goal Weight in {unit}</h2>
-                            <fetcher.Form method="post" ref={formRef}>
+                            <fetcher.Form method="post">
                                 <div className="grid-xs">
                                     <label htmlFor="newGoalWeight">Weight Amount </label>
-                                    <input type="number" step="0.01" name="newGoalWeight" id="newGoalWeight" placeholder={`Enter your goal weight (${unit})`} required inputMode='decimal' ref={focusRef}/>
+                                    <input type="number" step="0.01" name="newGoalWeight" id="newGoalWeight" placeholder={`Enter your goal weight (${unit})`} required inputMode='decimal' />
                                     <input type="hidden" name="_action" value="updateGoalWeight"/>
                                     <button type="submit" className='btn btn--dark' disabled={isSubmitting}>
                                         {
@@ -133,7 +127,7 @@ const AddWeightForm = ({ weights, weightUnits, goalWeight }) => {
                             <thead>
                                 <tr>
                                 {
-                                    ["Entry Number", "Weight (" + unit + ")", "Date", "Created At"].map((i, index) => (
+                                    ["Weight (" + unit + ")", "Date", "Created At", ""].map((i, index) => (
                                         <th key={index}>{i}</th>
                                     ))
                                 }
@@ -143,13 +137,29 @@ const AddWeightForm = ({ weights, weightUnits, goalWeight }) => {
                                 {
                                     weightVals?.map((weight) => (
                                             <tr key={weight.id}>
-                                                <WeightEntry weight={weight} weightUnits={unit} />
+                                                <>
+                                                    <td>{weight.weight + " " + unit}</td>
+                                                    <td>{weight.date}</td>
+                                                    <td>{weight.createdAt}</td>
+                                                    <td>
+                                                        <fetcher.Form className="Form" method="post">
+                                                            <input type="hidden" name="_action" value="deleteWeightEntry"/>
+                                                            <input type="hidden" name="weightID" value={weight.id}/>
+                                                            <button type="submit" className="btn btn--warning" aria-label={`Delete weight entry ${weight.id}`}>
+                                                                <TrashIcon width={20}/>
+                                                            </button>
+                                                        </fetcher.Form>
+                                                    </td>
+                                                </>
                                             </tr>    
                                     ))
                                 }
                             </tbody>
                         </table>
                         <WeightLineChart weightEntries={weightVals} weightUnits={unit} goalWeight={targetWeight}/>
+                    </div>
+                    <div className="rights-reserved">
+                        <h6 className="h6">WeightWise © 2024 by Julian-Justin Djoum. All Rights Reserved.</h6>
                     </div>
                 </div>
             )
