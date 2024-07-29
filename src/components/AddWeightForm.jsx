@@ -7,10 +7,10 @@ import { useFetcher, Form } from 'react-router-dom';
 import { PlusCircleIcon, ArrowPathIcon, TrashIcon } from '@heroicons/react/24/solid';
 
 // Helper functions
-import { convertGoalWeight, convertWeightUnits, fetchData } from '../helper';
+import { convertGoalWeight, convertweightUnit, fetchData } from '../helper';
 import WeightLineChart from './WeightLineChart';
 
-const AddWeightForm = ({ weights, weightUnits, goalWeight }) => {
+const AddWeightForm = ({ weights, weightUnit, goalWeight, height, heightUnit }) => {
     const fetcher = useFetcher();
     const isSubmitting = fetcher.state === "submitting";
     // Ref variables
@@ -18,7 +18,7 @@ const AddWeightForm = ({ weights, weightUnits, goalWeight }) => {
     const focusRef = useRef();
     // State variables
     const [weightVals, setWeightVals] = useState(weights);
-    const [unit, setUnit] = useState(weightUnits);
+    const [unit, setUnit] = useState(weightUnit);
     const [targetWeight, setTargetWeight] = useState(goalWeight);
     const [count, setCount] = useState(0);
 
@@ -36,17 +36,17 @@ const AddWeightForm = ({ weights, weightUnits, goalWeight }) => {
     }, [isSubmitting])
 
     useEffect(() => {
-        localStorage.setItem("weightUnits", JSON.stringify(unit));
+        localStorage.setItem("weightUnit", JSON.stringify(unit));
     }, [unit])
 
-    // handleToggle - Handles the logic when the change weight units toggle button is clicked
+    // handleToggle - Handles the logic when the change weight unit toggle button is clicked
     const handleToggle = () => {
         setCount(count + 1);
         const existingWeights = fetchData("weights") ?? [];
-        var newWeights = convertWeightUnits(existingWeights, unit);
+        var newWeights = convertweightUnit(existingWeights, unit);
         setWeightVals(newWeights);
-        localStorage.setItem("weightUnits", JSON.stringify(unit));
-        setUnit(prevUnits => (prevUnits === 'kgs' ? 'lbs' : 'kgs'));
+        localStorage.setItem("weightUnit", JSON.stringify(unit));
+        setUnit(prevUnits => (prevUnits === 'kg' ? 'lbs' : 'kg'));
         var newGoalWeight = convertGoalWeight(targetWeight, unit);
         setTargetWeight(newGoalWeight);
     };
@@ -60,6 +60,8 @@ const AddWeightForm = ({ weights, weightUnits, goalWeight }) => {
                     <div className="grid-xs">
                         <label htmlFor="newWeightAmount">Weight Amount </label>
                         <input type="number" step="0.01" name="newWeightAmount" id="newWeightAmount" placeholder={`Enter your weight (${unit})`} required inputMode='decimal'ref={focusRef}/>
+                        <input type="hidden" name="height" value={height}/>
+                        <input type="hidden" name="weightUnit" value={unit}/>
                     </div>
                     <div className="grid-xs">
                         <label htmlFor="dateInput">Date </label>
@@ -84,7 +86,7 @@ const AddWeightForm = ({ weights, weightUnits, goalWeight }) => {
             weightVals && weightVals.length > 0 && (
                 <div className="grid-md">
                     <div className='table'>
-                        {/* WeightUnitsToggle Form */}
+                        {/* weightUnitToggle Form */}
                         <div className='form-wrapper'>
                             <h2 className="h3">Update Goal Weight in {unit}</h2>
                             <fetcher.Form method="post">
@@ -106,14 +108,14 @@ const AddWeightForm = ({ weights, weightUnits, goalWeight }) => {
                             </fetcher.Form>
                         </div>
                         <br></br>
-                        {/* WeightUnitsToggle Form */}
+                        {/* weightUnitToggle Form */}
                         <div className='form-wrapper'>
-                            <h2 className="h3">Change Weight Units</h2>
+                            <h2 className="h3">Change Weight Unit</h2>
                             <button type="submit" className='btn btn--dark' disabled={isSubmitting} onClick={handleToggle}>
                                 {
                                     isSubmitting ? <span>Submitting...</span> : (
                                         <>
-                                            <span>{unit === 'lbs' ? 'Change units to kgs' : 'Change units to lbs'}</span>
+                                            <span>{unit === 'lbs' ? 'Change unit to kg' : 'Change unit to lbs'}</span>
                                             <ArrowPathIcon width={20} />
                                         </>
                                     )
@@ -156,10 +158,7 @@ const AddWeightForm = ({ weights, weightUnits, goalWeight }) => {
                                 }
                             </tbody>
                         </table>
-                        <WeightLineChart weightEntries={weightVals} weightUnits={unit} goalWeight={targetWeight}/>
-                    </div>
-                    <div className="rights-reserved">
-                        <h6 className="h6">WeightWise © 2024 by Julian-Justin Djoum. All Rights Reserved.</h6>
+                        <WeightLineChart weightEntries={weightVals} weightUnit={unit} goalWeight={targetWeight}/>
                     </div>
                 </div>
             )
