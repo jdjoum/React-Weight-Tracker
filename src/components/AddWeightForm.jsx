@@ -113,6 +113,7 @@ const AddWeightForm = ({ weights, weightUnit, goalWeight, height, heightUnit }) 
                             <h2 className="h3">Change Weight Unit</h2>
                             <button type="submit" className='btn btn--dark' disabled={isSubmitting} onClick={handleToggle}>
                                 {
+                                    // TODO: Make height unit change when the weight unit changes
                                     isSubmitting ? <span>Submitting...</span> : (
                                         <>
                                             <span>{unit === 'lbs' ? 'Change unit to kg' : 'Change unit to lbs'}</span>
@@ -129,6 +130,7 @@ const AddWeightForm = ({ weights, weightUnit, goalWeight, height, heightUnit }) 
                             <thead>
                                 <tr>
                                 {
+                                    // TODO: Add BMI to Table
                                     ["Weight (" + unit + ")", "Date", "Created At", ""].map((i, index) => (
                                         <th key={index}>{i}</th>
                                     ))
