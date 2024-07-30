@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { useLoaderData } from "react-router-dom";
 
 // Helper Functions
-import { addNewWeightEntry, deleteItem, fetchData, updateGoalWeight, wait } from '../helper';
+import { addNewWeightEntry, deleteItem, fetchData, wait } from '../helper';
 
 // dashboardLoader - Loads the info needed from localStorage for the components within the dashboard
 export function dashboardLoader() {
@@ -47,8 +47,6 @@ export async function dashboardAction({request}){
     // addWeightEntry Form Submission in the AddWeightForm component
     if (_action === "addWeightEntry") {
         try {
-            console.log(values.height);
-            console.log(values.weightUnit);
             addNewWeightEntry({
                 amount: values.newWeightAmount, 
                 date: values.dateInput,
@@ -67,7 +65,7 @@ export async function dashboardAction({request}){
         try {
             const goalWeight = parseFloat(values.newGoalWeight);
             const formattedGoalWeight = goalWeight.toFixed(2);
-            updateGoalWeight(formattedGoalWeight);
+            localStorage.setItem("goalWeight", formattedGoalWeight);
             return toast.success("Goal weight updated!");
         } catch(e) {
             console.error(e)

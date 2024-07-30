@@ -20,6 +20,18 @@ export async function logoutAction() {
     deleteItem({
         key: "weightUnit"
     })
+    // Delete the goal weight
+    deleteItem({
+        key: "goalWeight"
+    })
+    // Delete the height
+    deleteItem({
+        key: "height"
+    })
+    // Delete the height unit
+    deleteItem({
+        key: "heightUnit"
+    })
     toast.success("You've deleted your account!")
     // Return redirect
     return redirect("/")

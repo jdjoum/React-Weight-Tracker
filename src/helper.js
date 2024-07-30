@@ -38,8 +38,6 @@ export const addNewWeightEntry = ({ amount, date, height, weightUnit }) => {
     const formattedDate = formatDateInput(date)
     const now = new Date(Date.now());
     const formattedAmount = (+amount).toFixed(2);
-    console.log(height);
-    console.log(weightUnit);
     const BMI = calculateBMI(formattedAmount, height, weightUnit)
     const newWeight = {
         id: crypto.randomUUID(),
@@ -62,7 +60,7 @@ export const kgToLbs = (kg) => {
     return (kg * 2.20462).toFixed(2);
 };
 
-// convertweightUnit - Converts the existingWeights to kg or lbs based on the unit
+// convertweightUnit - Converts the existingWeights to kg or lbs based on the weightUnit
 export const convertweightUnit = (existingWeights, weightUnit) => {
     var newWeights = structuredClone(existingWeights);
     for (let i = 0; i < existingWeights.length; i++) {
@@ -72,11 +70,10 @@ export const convertweightUnit = (existingWeights, weightUnit) => {
             newWeights[i].weight = lbsTokg(existingWeights[i].weight);
         }
     }
-    localStorage.setItem("weights", JSON.stringify(newWeights));
     return newWeights;
 }
 
-// convertGoalWeight - Converts the goalWeight to kg or lbs based on the unit
+// convertGoalWeight - Converts the goalWeight to kg or lbs based on the weightUnit
 export const convertGoalWeight = (goalWeight, weightUnit) => {
     var newGoalWeight = 0;
     if (weightUnit == "kg") {
@@ -88,9 +85,25 @@ export const convertGoalWeight = (goalWeight, weightUnit) => {
     return newGoalWeight;
 }
 
-// updateGoalWeight - Updates the goal weight stored in localStorage 
-export const updateGoalWeight = ( weight ) => {
-    localStorage.setItem("goalWeight", weight);
+// inchesToMeters - Converts inches to meters
+function inchesToMeters(inches) {
+    return inches * 0.0254;
+}
+
+// metersToInches - Converts meters to inches
+function metersToInches(meters) {
+    return meters / 0.0254;
+}
+
+// convertHeight - Converts the height to inches or meters based on the unit
+export const convertHeight = (height, heightUnit) => {
+    var newHeight = 0;
+    if (heightUnit == "meters") {
+        newHeight = metersToInches(height);
+    } else {
+        newHeight = inchesToMeters(height);
+    }
+    return newHeight;
 }
 
 // calculateBMI - Calculates the BMI based on the unit
@@ -106,7 +119,6 @@ function calculateBMI(weight, height, weightUnit) {
   } else {
     throw new Error("Invalid unit. Use 'kg' or 'lbs'.");
   }
-  console.log(bmi);
   return bmi.toFixed(2);
 }
 
