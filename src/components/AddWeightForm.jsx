@@ -130,6 +130,7 @@ const AddWeightForm = ({ weights, weightUnit, goalWeight, height, heightUnit }) 
                         <div className='form-wrapper'>
                             <h2 className="h3">Change Weight Unit</h2>
                             <button type="submit" className='btn btn--dark' disabled={isSubmitting} onClick={handleToggle}>
+                                // TODO: Add info icon next to unit change button to mention it changes both heightUnit and weightUnit
                                 {
                                     isSubmitting ? <span>Submitting...</span> : (
                                         <>
