@@ -35,8 +35,10 @@ export async function dashboardAction({request}){
         try {
             localStorage.setItem("userName", JSON.stringify(values.userName));
             localStorage.setItem("weightUnit", JSON.stringify(values.weightUnit));
-            localStorage.setItem("goalWeight", JSON.stringify(values.goalWeight));
-            localStorage.setItem("height", JSON.stringify(values.height));
+            const goalWeight = (+values.goalWeight).toFixed(2);
+            localStorage.setItem("goalWeight", goalWeight);
+            const height = (+values.height).toFixed(2); 
+            localStorage.setItem("height", height);
             localStorage.setItem("heightUnit", JSON.stringify(values.heightUnit));
             return toast.success(`Welcome, ${values.userName}`);
         } catch(e) {

@@ -81,18 +81,17 @@ export const convertGoalWeight = (goalWeight, weightUnit) => {
     } else {
         newGoalWeight = lbsTokg(goalWeight);
     }
-    localStorage.setItem("goalWeight", JSON.stringify(newGoalWeight));
     return newGoalWeight;
 }
 
 // inchesToMeters - Converts inches to meters
 function inchesToMeters(inches) {
-    return inches * 0.0254;
+    return (inches * 0.0254).toFixed(2);
 }
 
 // metersToInches - Converts meters to inches
 function metersToInches(meters) {
-    return meters / 0.0254;
+    return (meters / 0.0254).toFixed(2);
 }
 
 // convertHeight - Converts the height to inches or meters based on the unit

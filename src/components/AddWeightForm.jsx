@@ -57,9 +57,9 @@ const AddWeightForm = ({ weights, weightUnit, goalWeight, height, heightUnit }) 
         localStorage.setItem("weights", JSON.stringify(newWeights));
         // Convert the goalWeight based on the weightUnit change
         var newGoalWeight = convertGoalWeight(targetWeight, weightUnitVal);
+        localStorage.setItem("goalWeight", JSON.stringify(newGoalWeight));
         setTargetWeight(newGoalWeight);
         // Update the heightUnit in localStorage
-        // TODO: Display height state variable on screen
         setHeightUnitVal(prevUnits => (prevUnits === 'meters' ? 'inches' : 'meters'));
         localStorage.setItem("heightUnit", JSON.stringify(heightUnitVal));
         // Convert the height based on the heightUnit change
@@ -71,6 +71,11 @@ const AddWeightForm = ({ weights, weightUnit, goalWeight, height, heightUnit }) 
 
     return (
     <>
+        <div className='form-wrapper'>
+            <h2 className="h3">Health Details</h2>
+            <p>Height: {heightVal} {heightUnitVal}</p>
+            <p>Goal Weight: {targetWeight} {weightUnitVal}</p>
+        </div>
         <div className="form-wrapper">
             <h2 className="h3">Add New Weight Entry in {weightUnitVal}</h2>
             <div className='container'>
@@ -128,13 +133,12 @@ const AddWeightForm = ({ weights, weightUnit, goalWeight, height, heightUnit }) 
                         <br></br>
                         {/* weightUnitToggle Form */}
                         <div className='form-wrapper'>
-                            <h2 className="h3">Change Weight Unit</h2>
+                            <h2 className="h3">Change Weight & Height Units</h2>
                             <button type="submit" className='btn btn--dark' disabled={isSubmitting} onClick={handleToggle}>
-                                // TODO: Add info icon next to unit change button to mention it changes both heightUnit and weightUnit
                                 {
                                     isSubmitting ? <span>Submitting...</span> : (
                                         <>
-                                            <span>{weightUnitVal === 'lbs' ? 'Change unit to kg' : 'Change unit to lbs'}</span>
+                                            <span>{weightUnitVal === 'lbs' ? 'Change units to kg and meters' : 'Change unit to lbs and inches'}</span>
                                             <ArrowPathIcon width={20} />
                                         </>
                                     )
@@ -148,8 +152,7 @@ const AddWeightForm = ({ weights, weightUnit, goalWeight, height, heightUnit }) 
                             <thead>
                                 <tr>
                                 {
-                                    // TODO: Add BMI to Table
-                                    ["Weight (" + weightUnitVal + ")", "Date", "Created At", ""].map((i, index) => (
+                                    ["Weight (" + weightUnitVal + ")", "Date", "Created At", "BMI", ""].map((i, index) => (
                                         <th key={index}>{i}</th>
                                     ))
                                 }
@@ -163,6 +166,7 @@ const AddWeightForm = ({ weights, weightUnit, goalWeight, height, heightUnit }) 
                                                     <td>{weight.weight + " " + weightUnitVal}</td>
                                                     <td>{weight.date}</td>
                                                     <td>{weight.createdAt}</td>
+                                                    <td>{weight.bmi}</td>
                                                     <td>
                                                         <fetcher.Form className="Form" method="post">
                                                             <input type="hidden" name="_action" value="deleteWeightEntry"/>
