@@ -35,10 +35,10 @@ function getDate() {
 // addNewWeightEntry - Adds a new weight entry to the list of weights stored in localStorage 
 export const addNewWeightEntry = ({ amount, date, height, weightUnit }) => {
     date = getDate();
-    const formattedDate = formatDateInput(date)
+    const formattedDate = formatDateInput(date);
     const now = new Date(Date.now());
     const formattedAmount = (+amount).toFixed(2);
-    const BMI = calculateBMI(formattedAmount, height, weightUnit)
+    const BMI = calculateBMI(formattedAmount, height, weightUnit);
     const newWeight = {
         id: crypto.randomUUID(),
         date: formattedDate,
@@ -94,7 +94,7 @@ function metersToInches(meters) {
     return (meters / 0.0254).toFixed(2);
 }
 
-// convertHeight - Converts the height to inches or meters based on the unit
+// convertHeight - Converts the height to inches or meters based on the heightUnit
 export const convertHeight = (height, heightUnit) => {
     var newHeight = 0;
     if (heightUnit == "meters") {
@@ -105,7 +105,7 @@ export const convertHeight = (height, heightUnit) => {
     return newHeight;
 }
 
-// calculateBMI - Calculates the BMI based on the unit
+// calculateBMI - Calculates the BMI based on the weightUnit
 function calculateBMI(weight, height, weightUnit) {
   if (weight <= 0 || height <= 0) {
     throw new Error("Weight and height must be greater than zero");

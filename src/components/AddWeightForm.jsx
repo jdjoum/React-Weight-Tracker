@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 // RRD Imports
-import { useFetcher, Form } from 'react-router-dom';
+import { useFetcher } from 'react-router-dom';
 
 // Library Imports
 import { PlusCircleIcon, ArrowPathIcon, TrashIcon } from '@heroicons/react/24/solid';
@@ -44,7 +44,7 @@ const AddWeightForm = ({ weights, weightUnit, goalWeight, height, heightUnit }) 
         localStorage.setItem("heightUnit", JSON.stringify(heightUnitVal));
     }, [weightUnitVal, heightUnitVal])
 
-    // handleToggle - Handles the logic when the change weight unit toggle button is clicked
+    // handleToggle - Handles the logic when the change weight and height unit toggle button is clicked
     const handleToggle = () => {
         setCount(count + 1);
         // Update the weightUnit in localStorage and the state variable
@@ -105,11 +105,10 @@ const AddWeightForm = ({ weights, weightUnit, goalWeight, height, heightUnit }) 
             </div>
         </div>
         {   
-            // Table Component
             weightVals && weightVals.length > 0 && (
                 <div className="grid-md">
                     <div className='table'>
-                        {/* weightUnitToggle Form */}
+                        {/* Update Goal Weight Form */}
                         <div className='form-wrapper'>
                             <h2 className="h3">Update Goal Weight in {weightUnitVal}</h2>
                             <fetcher.Form method="post">
@@ -131,14 +130,14 @@ const AddWeightForm = ({ weights, weightUnit, goalWeight, height, heightUnit }) 
                             </fetcher.Form>
                         </div>
                         <br></br>
-                        {/* weightUnitToggle Form */}
+                        {/* Weight & Height Unit Toggle Button */}
                         <div className='form-wrapper'>
                             <h2 className="h3">Change Weight & Height Units</h2>
                             <button type="submit" className='btn btn--dark' disabled={isSubmitting} onClick={handleToggle}>
                                 {
                                     isSubmitting ? <span>Submitting...</span> : (
                                         <>
-                                            <span>{weightUnitVal === 'lbs' ? 'Change units to kg and meters' : 'Change unit to lbs and inches'}</span>
+                                            <span>{weightUnitVal === 'lbs' ? 'Change units to kg and meters' : 'Change units to lbs and inches'}</span>
                                             <ArrowPathIcon width={20} />
                                         </>
                                     )
