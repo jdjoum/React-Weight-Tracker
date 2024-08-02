@@ -22,7 +22,7 @@ ChartJS.register(
   Legend
 );
 
-const WeightLineChart = ({ weightEntries, weightUnits, goalWeight }) => {
+const WeightLineChart = ({ weightEntries, weightUnit, goalWeight }) => {
     // Sort the weight entries by date before displaying them in the graph
     const sortedEntries = [...weightEntries].sort((a, b) => new Date(a.date) - new Date(b.date));
     const goalWeights = new Array(sortedEntries.length).fill(goalWeight);
@@ -53,7 +53,7 @@ const WeightLineChart = ({ weightEntries, weightUnits, goalWeight }) => {
                 beginAtZero: true,
                 title: {
                     display: true,
-                    text: `Weight (${weightUnits})` ,
+                    text: `Weight (${weightUnit})` ,
                 },
             },
             x: {
