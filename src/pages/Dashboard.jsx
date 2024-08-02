@@ -11,15 +11,17 @@ import { toast } from "react-toastify";
 import { useLoaderData } from "react-router-dom";
 
 // Helper Functions
-import { addNewWeightEntry, deleteItem, fetchData, updateGoalWeight, wait } from '../helper';
+import { addNewWeightEntry, deleteItem, fetchData, wait } from '../helper';
 
 // dashboardLoader - Loads the info needed from localStorage for the components within the dashboard
 export function dashboardLoader() {
     const userName = fetchData("userName");
     const weights = fetchData("weights");
-    const weightUnits = fetchData("weightUnits");
     const goalWeight = fetchData("goalWeight");
-    return { userName, weights, weightUnits, goalWeight }
+    const weightUnit = fetchData("weightUnit");
+    const height = fetchData("height");
+    const heightUnit = fetchData("heightUnit");
+    return { userName, weights, weightUnit, goalWeight, heightUnit, height }
 }
 
 // Action
@@ -32,8 +34,12 @@ export async function dashboardAction({request}){
     if (_action === "newUser") {
         try {
             localStorage.setItem("userName", JSON.stringify(values.userName));
-            localStorage.setItem("weightUnits", JSON.stringify(values.weightUnits));
-            localStorage.setItem("goalWeight", JSON.stringify(values.goalWeight));
+            localStorage.setItem("weightUnit", JSON.stringify(values.weightUnit));
+            const goalWeight = (+values.goalWeight).toFixed(2);
+            localStorage.setItem("goalWeight", goalWeight);
+            const height = (+values.height).toFixed(2); 
+            localStorage.setItem("height", height);
+            localStorage.setItem("heightUnit", JSON.stringify(values.heightUnit));
             return toast.success(`Welcome, ${values.userName}`);
         } catch(e) {
             throw new Error("There was a problem creating your account.");
@@ -45,7 +51,9 @@ export async function dashboardAction({request}){
         try {
             addNewWeightEntry({
                 amount: values.newWeightAmount, 
-                date: values.dateInput
+                date: values.dateInput,
+                height: values.height,
+                weightUnit: values.weightUnit,
             });
             return toast.success("Weight entry added!");
         } catch(e) {
@@ -59,7 +67,7 @@ export async function dashboardAction({request}){
         try {
             const goalWeight = parseFloat(values.newGoalWeight);
             const formattedGoalWeight = goalWeight.toFixed(2);
-            updateGoalWeight(formattedGoalWeight);
+            localStorage.setItem("goalWeight", formattedGoalWeight);
             return toast.success("Goal weight updated!");
         } catch(e) {
             console.error(e)
@@ -83,7 +91,7 @@ export async function dashboardAction({request}){
 }
 
 const Dashboard = () => {
-    const { userName, weights, weightUnits, goalWeight } = useLoaderData()
+    const { userName, weights, weightUnit, goalWeight, height, heightUnit } = useLoaderData()
     return (
         <>
             { userName ? (
@@ -92,7 +100,13 @@ const Dashboard = () => {
                     <div className="grid-sm">
                         <div className="grid-lg">
                             <div className="flex-lg">
-                                <AddWeightForm weights={weights} weightUnits={weightUnits} goalWeight={goalWeight}/>
+                                <AddWeightForm 
+                                    weights={weights} 
+                                    weightUnit={weightUnit} 
+                                    goalWeight={goalWeight}
+                                    height={height}
+                                    heightUnit={heightUnit}
+                                />
                             </div>
                         </div>
                     </div>

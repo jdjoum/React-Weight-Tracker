@@ -605,4 +605,5 @@ table a {
   display: flex;
   justify-content: center; /* Centers horizontally */
   align-items: center; /* Centers vertically */
+  margin-bottom: 15px;
 }

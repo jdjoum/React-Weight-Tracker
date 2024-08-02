@@ -26,6 +26,9 @@ const Main = () => {
             <main>
                 <Outlet />
             </main>
+            <div className="rights-reserved">
+                <h6 className="h6">WeightWise © 2024 by Julian-Justin Djoum. All Rights Reserved.</h6>
+            </div>
             <img src={wave} alt="" />
         </div>
     )
