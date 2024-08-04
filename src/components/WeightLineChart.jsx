@@ -32,7 +32,7 @@ const WeightLineChart = ({ weightEntries, weightUnit, goalWeight }) => {
         datasets: [
             {
                 label: 'Weight',
-                data: weightEntries.map(entry => entry.weight),
+                data: sortedEntries.map(entry => entry.weight),
                 fill: false,
                 backgroundColor: 'rgb(75, 192, 192)',
                 borderColor: 'rgba(75, 192, 192, 0.2)',
@@ -43,6 +43,12 @@ const WeightLineChart = ({ weightEntries, weightUnit, goalWeight }) => {
                 fill: false,
                 backgroundColor: 'rgb(255, 99, 132)',
                 
+            },
+            {
+                label: 'BMI',
+                data: sortedEntries.map(entry => entry.bmi),
+                fill: false,
+                backgroundColor: 'rgb(99, 255, 132)',
             },
         ],
     };

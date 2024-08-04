@@ -11,6 +11,7 @@ import { convertGoalWeight, convertHeight, convertweightUnit, fetchData } from '
 
 // Components
 import WeightLineChart from './WeightLineChart';
+import BmiRanges from './BmiRanges';
 
 const AddWeightForm = ({ weights, weightUnit, goalWeight, height, heightUnit }) => {
     const fetcher = useFetcher();
@@ -151,7 +152,7 @@ const AddWeightForm = ({ weights, weightUnit, goalWeight, height, heightUnit }) 
                             <thead>
                                 <tr>
                                 {
-                                    ["Weight (" + weightUnitVal + ")", "Date", "Created At", "BMI", ""].map((i, index) => (
+                                    ["Weight (" + weightUnitVal + ")", "BMI", "Date", "Created At", ""].map((i, index) => (
                                         <th key={index}>{i}</th>
                                     ))
                                 }
@@ -163,9 +164,9 @@ const AddWeightForm = ({ weights, weightUnit, goalWeight, height, heightUnit }) 
                                             <tr key={weight.id}>
                                                 <>
                                                     <td>{weight.weight + " " + weightUnitVal}</td>
+                                                    <td>{weight.bmi}</td>
                                                     <td>{weight.date}</td>
                                                     <td>{weight.createdAt}</td>
-                                                    <td>{weight.bmi}</td>
                                                     <td>
                                                         <fetcher.Form className="Form" method="post">
                                                             <input type="hidden" name="_action" value="deleteWeightEntry"/>
@@ -182,6 +183,7 @@ const AddWeightForm = ({ weights, weightUnit, goalWeight, height, heightUnit }) 
                             </tbody>
                         </table>
                         <WeightLineChart weightEntries={weightVals} weightUnit={weightUnitVal} goalWeight={targetWeight}/>
+                        <BmiRanges />
                     </div>
                 </div>
             )

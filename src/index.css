@@ -607,3 +607,35 @@ table a {
   align-items: center; /* Centers vertically */
   margin-bottom: 15px;
 }
+
+/* BmiRanges.css */
+.bmi-ranges {
+  padding: 20px;
+  /* background-color: #f8f8f8;
+  border-radius: 10px; */
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+
+.bmi-ranges h2 {
+  margin-bottom: 15px;
+}
+
+.bmi-ranges ul {
+  list-style: none;
+  padding: 0;
+}
+
+.bmi-ranges li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+/* .bmi-ranges .category {
+  font-weight: bold;
+} */
+
+/* .bmi-ranges .range {
+  font-style: italic;
+} */
+
