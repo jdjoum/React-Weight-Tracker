@@ -19,6 +19,7 @@ import Main, { mainLoader } from "./layouts/Main";
 
 // Actions
 import { logoutAction } from "./actions/logout";
+import Profile from "./pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,11 @@ const router = createBrowserRouter([
         element: <Dashboard />,
         loader: dashboardLoader,
         action: dashboardAction,
+        errorElement: <Error />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
         errorElement: <Error />,
       },
       {
