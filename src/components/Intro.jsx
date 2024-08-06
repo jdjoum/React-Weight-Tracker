@@ -34,6 +34,8 @@ const Intro = () => {
             <Form method="post">
                 <label htmlFor="userName">Name</label>
                 <input type='text' name='userName' required placeholder='What is your name?' aria-label='Your Name' autoComplete='given-name'/>
+                <label htmlFor="age">Age</label>
+                <input type='number' name='age' min={1} required inputMode='numeric' placeholder='What is your age?' aria-label='Your Age' />
                 <label htmlFor="weightUnit">Weight Unit</label>
                 <select name="weightUnit" id="weightUnit" onChange={handleWeightUnitChange} required>
                   <option value="lbs">lbs</option>
