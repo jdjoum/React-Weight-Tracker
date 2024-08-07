@@ -13,13 +13,13 @@ import 'react-toastify/dist/ReactToastify.css';
 // Routes
 import Error from "./pages/Error";
 import Dashboard, { dashboardAction, dashboardLoader } from './pages/Dashboard';
+import Profile, { profileLoader } from "./pages/Profile";
 
 // Layouts
 import Main, { mainLoader } from "./layouts/Main";
 
 // Actions
 import { logoutAction } from "./actions/logout";
-import Profile from "./pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +38,7 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
+        loader: profileLoader,
         errorElement: <Error />,
       },
       {
