@@ -77,6 +77,17 @@ export async function dashboardAction({request}){
         }
     }
 
+    // updateName Form Submission on the Profile page
+    if (_action === "updateName") {
+        try {
+            localStorage.setItem("userName", JSON.stringify(values.userName));
+            return toast.success("Name updated!");
+        } catch(e) {
+            console.error(e)
+            throw new Error("There was a problem updating your name.");
+        }
+    }
+
     // deleteWeightEntry Form submission in the AddWeightForm component
     if (_action === "deleteWeightEntry") {
         try {

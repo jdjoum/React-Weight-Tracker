@@ -39,6 +39,7 @@ const router = createBrowserRouter([
         path: "profile",
         element: <Profile />,
         loader: profileLoader,
+        action: dashboardAction,
         errorElement: <Error />,
       },
       {
