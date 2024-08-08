@@ -21,7 +21,8 @@ export function dashboardLoader() {
     const weightUnit = fetchData("weightUnit");
     const height = fetchData("height");
     const heightUnit = fetchData("heightUnit");
-    return { userName, weights, weightUnit, goalWeight, heightUnit, height }
+    const age = fetchData("age");
+    return { userName, weights, weightUnit, goalWeight, heightUnit, height, age }
 }
 
 // Action
@@ -40,6 +41,7 @@ export async function dashboardAction({request}){
             const height = (+values.height).toFixed(2); 
             localStorage.setItem("height", height);
             localStorage.setItem("heightUnit", JSON.stringify(values.heightUnit));
+            localStorage.setItem("age", JSON.stringify(values.age));
             return toast.success(`Welcome, ${values.userName}`);
         } catch(e) {
             throw new Error("There was a problem creating your account.");
@@ -75,6 +77,17 @@ export async function dashboardAction({request}){
         }
     }
 
+    // updateName Form Submission on the Profile page
+    if (_action === "updateName") {
+        try {
+            localStorage.setItem("userName", JSON.stringify(values.userName));
+            return toast.success("Name updated!");
+        } catch(e) {
+            console.error(e)
+            throw new Error("There was a problem updating your name.");
+        }
+    }
+
     // deleteWeightEntry Form submission in the AddWeightForm component
     if (_action === "deleteWeightEntry") {
         try {
@@ -91,7 +104,7 @@ export async function dashboardAction({request}){
 }
 
 const Dashboard = () => {
-    const { userName, weights, weightUnit, goalWeight, height, heightUnit } = useLoaderData()
+    const { userName, weights, weightUnit, goalWeight, height, heightUnit, age } = useLoaderData()
     return (
         <>
             { userName ? (
@@ -106,6 +119,7 @@ const Dashboard = () => {
                                     goalWeight={goalWeight}
                                     height={height}
                                     heightUnit={heightUnit}
+                                    age={age}
                                 />
                             </div>
                         </div>
