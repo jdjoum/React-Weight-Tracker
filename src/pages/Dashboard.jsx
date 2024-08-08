@@ -88,6 +88,28 @@ export async function dashboardAction({request}){
         }
     }
 
+    // updateHeight Form Submission on the Profile page
+    if (_action === "updateHeight") {
+        try {
+            localStorage.setItem("height", JSON.stringify(values.height));
+            return toast.success("Height updated!");
+        } catch(e) {
+            console.error(e)
+            throw new Error("There was a problem updating your height.");
+        }
+    }
+
+    // updateAge Form Submission on the Profile page
+    if (_action === "updateAge") {
+        try {
+            localStorage.setItem("age", JSON.stringify(values.age));
+            return toast.success("Age updated!");
+        } catch(e) {
+            console.error(e)
+            throw new Error("There was a problem updating your age.");
+        }
+    }
+
     // deleteWeightEntry Form submission in the AddWeightForm component
     if (_action === "deleteWeightEntry") {
         try {
