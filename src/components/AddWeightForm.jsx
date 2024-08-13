@@ -13,7 +13,7 @@ import { convertGoalWeight, convertHeight, convertweightUnit, fetchData } from '
 import WeightLineChart from './WeightLineChart';
 import BmiRanges from './BmiRanges';
 
-const AddWeightForm = ({ weights, weightUnit, goalWeight, height, heightUnit }) => {
+const AddWeightForm = ({ weights, weightUnit, goalWeight, height, heightUnit, age }) => {
     const fetcher = useFetcher();
     const isSubmitting = fetcher.state === "submitting";
     // Ref variables
@@ -74,6 +74,7 @@ const AddWeightForm = ({ weights, weightUnit, goalWeight, height, heightUnit }) 
     <>
         <div className='form-wrapper'>
             <h2 className="h3">Health Details</h2>
+            <p>Age: {age}</p>
             <p>Height: {heightVal} {heightUnitVal}</p>
             <p>Goal Weight: {targetWeight} {weightUnitVal}</p>
         </div>
