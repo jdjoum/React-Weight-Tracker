@@ -34,5 +34,5 @@ export async function logoutAction() {
     })
     toast.success("You've deleted your account!")
     // Return redirect
-    return redirect("/")
+    return redirect("/weightwise")
 }

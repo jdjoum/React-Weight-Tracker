@@ -23,13 +23,13 @@ import { logoutAction } from "./actions/logout";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/weightwise",
     element: <Main />,
     loader: mainLoader,
     errorElement: <Error />,
     children: [
       {
-        path: "/",
+        path: "/weightwise",
         element: <Dashboard />,
         loader: dashboardLoader,
         action: dashboardAction,
