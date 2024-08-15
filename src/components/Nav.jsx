@@ -12,18 +12,18 @@ import logomark from "/weighing-scale.png"
 const Nav = ({ userName }) => {
   return (
     <nav>
-        <NavLink to="/" aria-label="Go to home">
+        <NavLink to="/React-Weight-Tracker/" aria-label="Go to home">
             <img src={logomark} alt="" height={30}/>
             <span>WeightWise</span>
         </NavLink>
         {
             userName && (
                 <>
-                    <NavLink to="profile" aria-label="Go to profile">
+                    <NavLink to="/React-Weight-Tracker/profile" aria-label="Go to profile">
                         <Cog6ToothIcon width={30} />
                         <span>Profile</span>
                     </NavLink>
-                    <Form method="post" action="/logout" onSubmit={(e) => {
+                    <Form method="post" action="logout" onSubmit={(e) => {
                         if(!confirm("Delete user and all data?")) {
                             e.preventDefault();
                         }
