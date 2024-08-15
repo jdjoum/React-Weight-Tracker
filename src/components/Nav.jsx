@@ -19,7 +19,7 @@ const Nav = ({ userName }) => {
         {
             userName && (
                 <>
-                    <NavLink to="/weightwise/profile" aria-label="Go to profile">
+                    <NavLink to="/react-weight-tracker/profile" aria-label="Go to profile">
                         <Cog6ToothIcon width={30} />
                         <span>Profile</span>
                     </NavLink>
