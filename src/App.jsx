@@ -23,13 +23,13 @@ import { logoutAction } from "./actions/logout";
 
 const router = createBrowserRouter([
   {
-    path: "/weightwise",
+    path: "/react-weight-tracker",
     element: <Main />,
     loader: mainLoader,
     errorElement: <Error />,
     children: [
       {
-        path: "/weightwise",
+        path: "/react-weight-tracker",
         element: <Dashboard />,
         loader: dashboardLoader,
         action: dashboardAction,

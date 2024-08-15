@@ -12,7 +12,7 @@ import logomark from "/weighing-scale.png"
 const Nav = ({ userName }) => {
   return (
     <nav>
-        <NavLink to="/weightwise" aria-label="Go to home">
+        <NavLink to="/react-weight-tracker" aria-label="Go to home">
             <img src={logomark} alt="" height={30}/>
             <span>WeightWise</span>
         </NavLink>
