@@ -111,6 +111,11 @@ const WeightLineChart = ({ weightEntries, weightUnit, goalWeight }) => {
             },
         },
         plugins: {
+            legend: {
+                labels: {
+                    color: colors.titleColor,
+                },
+            },
             title: {
                 display: true,
                 text: 'Weight Graph',
