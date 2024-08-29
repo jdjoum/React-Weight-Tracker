@@ -34,6 +34,14 @@ svg {
   --muted: 183 8% 55%;
   --light: 180 14% 85%;
   --warning: 4 66% 63%;
+  /* dark mode colors */
+  /* --accent: 183 74% 44%;
+  --bkg: 190 40% 10%; 
+  --text: 185 26% 90%; 
+  --muted: 183 8% 50%; 
+  --light: 180 14% 20%;  
+  --warning: 4 66% 63%;     */
+  
 
   /* utils */
   --space-xs: 8px;
@@ -50,6 +58,15 @@ svg {
 
   /* toast customizations */
   --toastify-color-success: hsl(var(--accent));
+}
+
+[data-theme="dark"] {
+  --accent: 183 74% 44%;
+  --bkg: 190 40% 10%; 
+  --text: 185 26% 90%; 
+  --muted: 183 8% 50%; 
+  --light: 180 14% 20%;  
+  --warning: 4 66% 63%;    
 }
 
 body {
@@ -611,9 +628,6 @@ table a {
 /* BmiRanges.css */
 .bmi-ranges {
   padding: 20px;
-  /* background-color: #f8f8f8;
-  border-radius: 10px; */
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 }
 
 .bmi-ranges h2 {
@@ -631,11 +645,43 @@ table a {
   margin-bottom: 10px;
 }
 
-/* .bmi-ranges .category {
-  font-weight: bold;
-} */
+/* Default styles for text, number inputs, and select dropdowns */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+  color: hsl(var(--text)); /* Use the light mode text color */
+}
 
-/* .bmi-ranges .range {
-  font-style: italic;
-} */
+/* Dark mode styles for text, number inputs, and select dropdowns */
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="number"],
+[data-theme="dark"] input[type="date"],
+[data-theme="dark"] select {
+  color: hsl(0, 0%, 100%); /* Set text color to white */
+}
+
+/* Placeholder color for text and number inputs */
+input[type="text"]::placeholder,
+input[type="number"]::placeholder,
+input[type="date"]::placeholder {
+  color: hsl(var(--muted)); /* Use the light mode muted color */
+}
+
+[data-theme="dark"] input[type="text"]::placeholder,
+[data-theme="dark"] input[type="number"]::placeholder,
+[data-theme="dark"] input[type="date"]::placeholder {
+  color: hsl(0, 0%, 60%); /* Darken placeholder color for dark mode */
+}
+
+/* Styling the calendar icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0); /* No invert for light mode */
+}
+
+/* Dark mode styling for the calendar icon */
+[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* Inverts the icon color to white for dark mode */
+}
+
 
