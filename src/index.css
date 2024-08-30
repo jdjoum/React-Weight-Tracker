@@ -34,14 +34,6 @@ svg {
   --muted: 183 8% 55%;
   --light: 180 14% 85%;
   --warning: 4 66% 63%;
-  /* dark mode colors */
-  /* --accent: 183 74% 44%;
-  --bkg: 190 40% 10%; 
-  --text: 185 26% 90%; 
-  --muted: 183 8% 50%; 
-  --light: 180 14% 20%;  
-  --warning: 4 66% 63%;     */
-  
 
   /* utils */
   --space-xs: 8px;
