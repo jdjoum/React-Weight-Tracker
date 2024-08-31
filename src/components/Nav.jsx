@@ -8,6 +8,7 @@ import { TrashIcon, Cog6ToothIcon, MoonIcon, SunIcon } from "@heroicons/react/24
 
 // Assets
 import logomark from "/weighing-scale.png"
+import { logoutAction } from '../actions/logout';
 
 const body = document.body;
 
@@ -26,7 +27,7 @@ const Nav = ({ userName }) => {
 
     return (
         <nav>
-            <NavLink to="/React-Weight-Tracker/" aria-label="Go to home">
+            <NavLink to="/React-Weight-Tracker" aria-label="Go to home">
                 <img src={logomark} alt="" height={30}/>
                 <span>WeightWise</span>
             </NavLink>
@@ -43,14 +44,14 @@ const Nav = ({ userName }) => {
                 location.reload();
             }}>
                 <button type="submit" className='btn'>
-                    {isDarkMode ? <SunIcon width={30} /> : <MoonIcon width={30} />}
+                    {isDarkMode ? <SunIcon width={20} /> : <MoonIcon width={20} />}
                 </button>
             </Form>
                 
             {
                 userName && (
                     <>
-                        <NavLink to="/React-Weight-Tracker/profile" aria-label="Go to profile">
+                        <NavLink to="profile" aria-label="Go to profile">
                             <Cog6ToothIcon width={30} />
                             <span>Profile</span>
                         </NavLink>

@@ -3,7 +3,7 @@
 Tracking your weight is the secret to a healthier you. Start your journey today with this simple and effective application called WeightWise.
 
 ## Live Demo
-You can access the live version of the React Weight Tracker app [here](https://jdjoum.github.io/React-Weight-Tracker/).
+You can access the live version of the React Weight Tracker app [here](https://jdjoum.github.io/React-Weight-Tracker).
 
 ## Getting Started
 Follow these steps to set up and run the React Weight Tracker app:
