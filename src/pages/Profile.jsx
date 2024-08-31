@@ -72,104 +72,102 @@ const Profile = () => {
 
   return (
     <div className='dashboard'>
-      <h1>Manage Profile</h1>
-      <div className="grid-sm"> 
-        <div className="grid-lg">
-          <div className="flex-lg">
-              <div className="form-wrapper">
-                <h2 className="h3">Update Name</h2>
-                <fetcher.Form method="post">
-                    <div className="grid-xs">
-                      <input type='text' name='userName' required placeholder='Enter your name' aria-label='Your Name' autoComplete='given-name'/>
-                      <input type="hidden" name="_action" value="updateName"/>
-                      <button type="submit" className='btn btn--dark' disabled={isSubmitting}>
-                          {
-                              isSubmitting ? <span>Submitting...</span> : (
-                                  <>
-                                      <span>Update Name</span>
-                                      <ArrowPathIcon width={20} />
-                                  </>
-                              )
-                          }
-                      </button>
+        <h1>Manage Profile</h1>
+        <div className="grid-sm"> 
+            <div className="grid-lg">
+                <div className="flex-lg">
+                    <div className="form-wrapper">
+                        <h2 className="h3">Update Name</h2>
+                        <fetcher.Form method="post">
+                            <div className="grid-xs">
+                                <input type='text' name='userName' required placeholder='Enter your name' aria-label='Your Name' autoComplete='given-name'/>
+                                <input type="hidden" name="_action" value="updateName"/>
+                                <button type="submit" className='btn btn--dark' disabled={isSubmitting}>
+                                    {
+                                        isSubmitting ? <span>Submitting...</span> : (
+                                            <>
+                                                <span>Update Name</span>
+                                                <ArrowPathIcon width={20} />
+                                            </>
+                                        )
+                                    }
+                                </button>
+                            </div>
+                        </fetcher.Form>
                     </div>
-                </fetcher.Form>
-            </div>
-            <div className="form-wrapper">
-                <h2 className="h3">Update Age</h2>
-                <fetcher.Form method="post">
-                    <div className="grid-xs">
-                      <input type='number' name='age' min={1} required inputMode='decimal' placeholder={`Enter your age`} aria-label='Your Age' />
-                      <input type="hidden" name="_action" value="updateAge"/>
-                      <button type="submit" className='btn btn--dark' disabled={isSubmitting}>
-                          {
-                              isSubmitting ? <span>Submitting...</span> : (
-                                  <>
-                                      <span>Update Age</span>
-                                      <ArrowPathIcon width={20} />
-                                  </>
-                              )
-                          }
-                      </button>
+                    <div className="form-wrapper">
+                        <h2 className="h3">Update Age</h2>
+                        <fetcher.Form method="post">
+                            <div className="grid-xs">
+                            <input type='number' name='age' min={1} required inputMode='decimal' placeholder={`Enter your age`} aria-label='Your Age' />
+                            <input type="hidden" name="_action" value="updateAge"/>
+                            <button type="submit" className='btn btn--dark' disabled={isSubmitting}>
+                                {
+                                    isSubmitting ? <span>Submitting...</span> : (
+                                        <>
+                                            <span>Update Age</span>
+                                            <ArrowPathIcon width={20} />
+                                        </>
+                                    )
+                                }
+                            </button>
+                            </div>
+                        </fetcher.Form>
                     </div>
-                </fetcher.Form>
-            </div>
-            <div className='form-wrapper'>
-                <h2 className="h3">Change Weight & Height Units</h2>
-                <button type="submit" className='btn btn--dark' disabled={isSubmitting} onClick={handleToggle}>
-                    {
-                        isSubmitting ? <span>Submitting...</span> : (
-                            <>
-                                <span>{weightUnitVal === 'lbs' ? 'Change units to kg and meters' : 'Change units to lbs and inches'}</span>
-                                <ArrowPathIcon width={20} />
-                            </>
-                        )
-                    }
-                </button>
-            </div>
-            <div className='form-wrapper'>
-                <h2 className="h3">Update Goal Weight</h2>
-                <fetcher.Form method="post">
-                    <div className="grid-xs">
-                        <input type="number" step="0.01" name="newGoalWeight" id="newGoalWeight" placeholder={`Enter your goal weight (${weightUnitVal})`} required inputMode='decimal' />
-                        <input type="hidden" name="_action" value="updateGoalWeight"/>
-                        <button type="submit" className='btn btn--dark' disabled={isSubmitting}>
+                    <div className='form-wrapper'>
+                        <h2 className="h3">Change Weight & Height Units</h2>
+                        <button type="submit" className='btn btn--dark' disabled={isSubmitting} onClick={handleToggle}>
                             {
                                 isSubmitting ? <span>Submitting...</span> : (
                                     <>
-                                        <span>Update Goal Weight</span>
+                                        <span>{weightUnitVal === 'lbs' ? 'Change units to kg and meters' : 'Change units to lbs and inches'}</span>
                                         <ArrowPathIcon width={20} />
                                     </>
                                 )
                             }
                         </button>
                     </div>
-                </fetcher.Form>
-            </div>
-            <div className="form-wrapper">
-                <h2 className="h3">Update Height</h2>
-                <fetcher.Form method="post">
-                    <div className="grid-xs">
-                      <input type='number' name='height' min={1} required inputMode='decimal' placeholder={`Enter your height (${heightUnitVal})`} aria-label='Your Height' step="0.01"  />
-                      <input type="hidden" name="_action" value="updateHeight"/>
-                      <button type="submit" className='btn btn--dark' disabled={isSubmitting}>
-                          {
-                              isSubmitting ? <span>Submitting...</span> : (
-                                  <>
-                                      <span>Update Height</span>
-                                      <ArrowPathIcon width={20} />
-                                  </>
-                              )
-                          }
-                      </button>
+                    <div className='form-wrapper'>
+                        <h2 className="h3">Update Goal Weight</h2>
+                        <fetcher.Form method="post">
+                            <div className="grid-xs">
+                                <input type="number" step="0.01" name="newGoalWeight" id="newGoalWeight" placeholder={`Enter your goal weight (${weightUnitVal})`} required inputMode='decimal' />
+                                <input type="hidden" name="_action" value="updateGoalWeight"/>
+                                <button type="submit" className='btn btn--dark' disabled={isSubmitting}>
+                                    {
+                                        isSubmitting ? <span>Submitting...</span> : (
+                                            <>
+                                                <span>Update Goal Weight</span>
+                                                <ArrowPathIcon width={20} />
+                                            </>
+                                        )
+                                    }
+                                </button>
+                            </div>
+                        </fetcher.Form>
                     </div>
-                </fetcher.Form>
-            </div>       
-          </div>  
-        </div>           
-      </div>   
-      
-      
+                    <div className="form-wrapper">
+                        <h2 className="h3">Update Height</h2>
+                        <fetcher.Form method="post">
+                            <div className="grid-xs">
+                            <input type='number' name='height' min={1} required inputMode='decimal' placeholder={`Enter your height (${heightUnitVal})`} aria-label='Your Height' step="0.01"  />
+                            <input type="hidden" name="_action" value="updateHeight"/>
+                            <button type="submit" className='btn btn--dark' disabled={isSubmitting}>
+                                {
+                                    isSubmitting ? <span>Submitting...</span> : (
+                                        <>
+                                            <span>Update Height</span>
+                                            <ArrowPathIcon width={20} />
+                                        </>
+                                    )
+                                }
+                            </button>
+                            </div>
+                        </fetcher.Form>
+                    </div>       
+                </div>  
+            </div>           
+        </div>   
     </div>
   )
 }
