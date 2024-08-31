@@ -20,7 +20,6 @@ import Main, { mainLoader } from "./layouts/Main";
 
 // Actions
 import { logoutAction } from "./actions/logout";
-import { updateDisplayModeAction } from "./actions/updateDisplayMode";
 
 const router = createBrowserRouter([
   {
@@ -47,10 +46,6 @@ const router = createBrowserRouter([
         path: "logout",
         action: logoutAction,
       },
-      {
-        path: "updateDisplayMode",
-        action: updateDisplayModeAction,
-      }
     ]
   },
 ]);

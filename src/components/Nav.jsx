@@ -30,7 +30,7 @@ const Nav = ({ userName }) => {
                 <img src={logomark} alt="" height={30}/>
                 <span>WeightWise</span>
             </NavLink>
-            <Form method="post" action="updateDisplayMode" onSubmit={(e) => {
+            <Form method="post" action="#" onSubmit={(e) => {
                 if (body.getAttribute('data-theme') === 'dark') {
                     body.removeAttribute('data-theme');
                     localStorage.setItem("displayMode", JSON.stringify("light-mode"));
@@ -40,6 +40,7 @@ const Nav = ({ userName }) => {
                     localStorage.setItem("displayMode", JSON.stringify("dark-mode"));
                     setIsDarkMode(true);
                 }
+                location.reload();
             }}>
                 <button type="submit" className='btn'>
                     {isDarkMode ? <SunIcon width={30} /> : <MoonIcon width={30} />}
