@@ -615,6 +615,8 @@ table a {
   justify-content: center; /* Centers horizontally */
   align-items: center; /* Centers vertically */
   margin-bottom: 15px;
+  width: 100%; /* Ensures the container spans the full width */
+  text-align: center; /* Ensures text is centered within the flex item */
 }
 
 /* BmiRanges.css */
